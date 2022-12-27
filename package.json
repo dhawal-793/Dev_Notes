@@ -1,0 +1,20 @@
+{
+  "name": "ur-notes",
+  "version": "2.0.0",
+  "description": "",
+  "main": "Backend/index.js",
+  "scripts": {
+    "client": "npm start --prefix Frontend",
+    "server": "npm run dev --prefix Backend",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "init": " npm i --prefix Frontend && npm i --prefix Backend",
+    "build": "npm run build --prefix Frontend",
+    "production": "npm run init && npm run build && npm run production --prefix Backend",
+    "render":"npm i --prefix Backend && npm run production --prefix Backend"
+  },
+  "keywords": [],
+  "author": "Dhawal Vijayvargiya",
+  "license": "ISC",
+  "dependencies": {}
+}
+  
