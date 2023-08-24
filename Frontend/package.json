@@ -2,20 +2,19 @@
   "name": "ur-notes-frontend",
   "version": "2.0.0",
   "private": true,
-  "author":"Dhawal Vijayvargiya",
+  "author": "Dhawal Vijayvargiya",
   "homepage": "/",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
     "ur-notes": "file:.."
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
-    "production":"npm i && npm run build"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "production": "npm i && npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +33,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.4",
+    "autoprefixer": "^10.4.15",
+    "postcss": "^8.4.28",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.9"
   }
 }

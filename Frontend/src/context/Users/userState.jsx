@@ -7,7 +7,7 @@ const UserState = (props) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   // VARIABLES
 
-  const host = process.env.REACT_APP_HOST;
+  const host = import.meta.env.VITE_HOST;
   console.log(host);
   const navigate = useNavigate();
   const [alert, setAlert] = useState({
