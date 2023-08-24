@@ -8,8 +8,24 @@
   ],
   "routes": [
     {
+      "src": "/routes/(.*)",
+      "dest": "/routes/$1"
+    },
+    {
+      "src": "/middleware/(.*)",
+      "dest": "/middleware/$1"
+    },
+    {
+      "src": "/models/(.*)",
+      "dest": "/models/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "db.js"
     }
   ]
 }
