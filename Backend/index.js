@@ -11,7 +11,9 @@ const port = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cors(
   {
-    origin: ["http://localhost:3000", process.env.FRONTEND]
+    origin: ["http://localhost:3000", process.env.FRONTEND],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Authorization', 'Content-Type'],
   }
 ));
 
@@ -34,5 +36,5 @@ if (
 }
 
 app.listen(port, () => {
-  console.log(`UrNotes Backend listening at port ${port}`);
+  console.log(`DevNotes Backend listening at port ${port}`);
 });

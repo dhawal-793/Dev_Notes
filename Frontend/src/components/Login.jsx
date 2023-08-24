@@ -77,7 +77,7 @@ const Login = () => {
             marginRight: "7vw",
           }}
         >
-          <h2 className="container text-center mb-3 py-2">Log In to UrNotes</h2>
+          <h2 className="container text-center mb-3 py-2">Log In to DevNotes</h2>
           <form>
             <div className="form-floating mb-3 ">
               <input

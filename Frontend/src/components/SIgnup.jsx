@@ -83,7 +83,7 @@ const SIgnup = () => {
         
 
           <h2 className="container text-center mb-3 py-2">
-            Sign Up to UrNotes
+            Sign Up to DevNotes
           </h2>
           <form>
             <div className="form-floating mb-2 ">

@@ -1,5 +1,5 @@
 {
-  "name": "ur-notes-frontend",
+  "name": "dev_notes-frontend",
   "version": "2.0.0",
   "private": true,
   "author": "Dhawal Vijayvargiya",
@@ -8,7 +8,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
-    "ur-notes": "file:.."
+    "dev_notes": "file:.."
   },
   "scripts": {
     "start": "vite",

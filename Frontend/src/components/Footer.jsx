@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer className="fixed-bottom text-center text-lg-mid text-light bg-custom">
-      © {new Date().getFullYear()} Copyright: UrNotes.com
+      © {new Date().getFullYear()} Copyright: DevNotes.com
     </footer>
   );
 };
