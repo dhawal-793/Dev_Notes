@@ -1,7 +1,7 @@
 {
-  "name": "ur-notes-backend",
+  "name": "dev_notes-backend",
   "version": "2.0.0",
-  "description": "The backend for ur-notes app",
+  "description": "The backend for dev_notes app",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
@@ -18,7 +18,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.7",
     "path": "^0.12.7",
-    "ur-notes": "file:.."
+    "dev_notes": "file:.."
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

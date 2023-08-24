@@ -19,7 +19,7 @@ const App = () => {
     <>
       <UserState>
         <NoteState>
-          <Navbar title={"UrNotes"} />
+          <Navbar title={"DevNotes"} />
 
           {/* <Alert message="APP STARTED" type="success"/> */}
           <div className="container">

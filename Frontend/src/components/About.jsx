@@ -10,12 +10,12 @@ const About = () => {
       <div className="container py-5 my-5">
         <div className="card text-white bg-custom my-5">
           <div className="card-body">
-            <h3 className="text-center card-title py-2">UrNotes</h3>
+            <h3 className="text-center card-title py-2">DevNotes</h3>
             <hr />
             <ul style={{ listStyleType: "square" }}>
               <li>
                 <h5>
-                  UrNotes is a cloud based Notes app build to store user's notes
+                  DevNotes is a cloud based Notes app build to store user's notes
                   anytime, anywhere on the cloud with easy access to their
                   notes.
                 </h5>
@@ -37,7 +37,7 @@ const About = () => {
                 </h5>
               </li>
               <li>
-                <h5>Some Features of UrNotes &rarr;</h5>
+                <h5>Some Features of DevNotes &rarr;</h5>
                 <ul>
                   <li>The app uses Express Api to fetch all the data.</li>
                   <li>
@@ -61,7 +61,7 @@ const About = () => {
                     also Included.
                   </li> */}
                   <li>It is completely Device Responsive</li>
-                  <li>All the Rights are reserved by UrNotes. </li>
+                  <li>All the Rights are reserved by DevNotes. </li>
                 </ul>
               </li>
             </ul>

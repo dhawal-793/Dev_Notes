@@ -34,5 +34,5 @@ if (
 }
 
 app.listen(port, () => {
-  console.log(`UrNotes Backend listening at port ${port}`);
+  console.log(`DevNotes Backend listening at port ${port}`);
 });
