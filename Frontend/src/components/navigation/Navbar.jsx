@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../Logo_Icons/DevNotes-32.png";
-import Menu from "../Logo_Icons/Menu-32.png";
+import Logo from "../../Logo_Icons/DevNotes-32.png";
+import Menu from "../../Logo_Icons/Menu-32.png";
 const Navbar = (props) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -18,7 +18,7 @@ const Navbar = (props) => {
     localStorage.removeItem("token");
     navigate("/login");
   };
-  useEffect(() => {}, [location]);
+  useEffect(() => { }, [location]);
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -45,12 +45,11 @@ const Navbar = (props) => {
         </span>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="mb-2 navbar-nav me-auto mb-lg-0">
             <li className="nav-item">
               <Link
-                className={`nav-link ${
-                  location.pathname === "/" ? "active" : ""
-                }`}
+                className={`nav-link ${location.pathname === "/" ? "active" : ""
+                  }`}
                 to="/"
               >
                 Home
@@ -59,9 +58,8 @@ const Navbar = (props) => {
 
             <li className="nav-item">
               <Link
-                className={`nav-link ${
-                  location.pathname === "/textutils" ? "active" : ""
-                }`}
+                className={`nav-link ${location.pathname === "/textutils" ? "active" : ""
+                  }`}
                 to="/textutils"
               >
                 TextUtils
@@ -69,38 +67,37 @@ const Navbar = (props) => {
             </li>
             <li className="nav-item">
               <Link
-                className={`nav-link ${
-                  location.pathname === "/about" ? "active" : ""
-                }`}
+                className={`nav-link ${location.pathname === "/about" ? "active" : ""
+                  }`}
                 to="/about"
               >
                 About Us
               </Link>
             </li>
           </ul>
-            {localStorage.getItem("token") ? (
-              <button className="btn-sm btn-bg-custom m-0 p-2" onClick={logout}>
-                <i className="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Logout
-              </button>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="link-btn-bg-custom nav-item btn-sm mx-1 p-2"
-                  role="button"
-                >
-                  <i className="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Login
-                </Link>
+          {localStorage.getItem("token") ? (
+            <button className="p-2 m-0 btn-sm btn-bg-custom" onClick={logout}>
+              <i className="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Logout
+            </button>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="p-2 mx-1 link-btn-bg-custom nav-item btn-sm"
+                role="button"
+              >
+                <i className="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Login
+              </Link>
 
-                <Link
-                  to="/signup"
-                  className="link-btn-bg-custom btn-sm mx-1 p-2"
-                  role="button"
-                >
-                  <i className="fa-solid fa-user-plus"></i>&nbsp; SignUp
-                </Link>
-              </>
-            )}
+              <Link
+                to="/signup"
+                className="p-2 mx-1 link-btn-bg-custom btn-sm"
+                role="button"
+              >
+                <i className="fa-solid fa-user-plus"></i>&nbsp; SignUp
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
@@ -132,7 +129,7 @@ export default Navbar;
     <div>
       Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
     </div>
-    <div className="dropdown mt-3">
+    <div className="mt-3 dropdown">
       <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
         Dropdown button
       </button>
@@ -190,7 +187,7 @@ export default Navbar;
     <button type="button" className="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
   </div>
   <div className="offcanvas-body">
-     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+     <ul className="mb-2 navbar-nav me-auto mb-lg-0">
             <li className="nav-item">
               <Link
                 className={`nav-link ${
@@ -225,14 +222,14 @@ export default Navbar;
           </ul>
           <form>
             {localStorage.getItem("token") ? (
-              <button className="btn-sm btn-bg-custom m-0" onClick={logout}>
+              <button className="m-0 btn-sm btn-bg-custom" onClick={logout}>
                 <i className="fa-solid fa-arrow-right-to-bracket"></i> Logout
               </button>
             ) : (
               <>
                 <Link
                   to="/login"
-                  className="link-btn-bg-custom nav-item btn-sm mx-1"
+                  className="mx-1 link-btn-bg-custom nav-item btn-sm"
                   role="button"
                 >
                   <i className="fa-solid fa-arrow-right-to-bracket"></i> Login
@@ -240,7 +237,7 @@ export default Navbar;
 
                 <Link
                   to="/signup"
-                  className="link-btn-bg-custom btn-sm mx-1"
+                  className="mx-1 link-btn-bg-custom btn-sm"
                   role="button"
                 >
                   <i className="fa-solid fa-user-plus"></i> SignUp
