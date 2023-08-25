@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import userContext from "../context/Users/userContext";
-import Alert from "./Alert";
+import Alert from "../components/Alert";
 
 const Login = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -44,7 +44,7 @@ const Login = () => {
   return (
     <div className="custom-text">
       <div
-        className=" relative sticky-top "
+        className="relative sticky-top"
         style={{
           minHeight: "2vh",
           maxHeight: "2.1vh",
@@ -64,22 +64,22 @@ const Login = () => {
 
       <div className="pb-2 maxHeight-30rem">
         <div className="container text-center lh-lg ">
-          <h1 className="fw-bold container">
+          <h1 className="container fw-bold">
             <i> Ur Notes </i>
           </h1>
           <p className="fs-6">Your Notes secured on the cloud</p>
         </div>
         <div
-          className=" border border-light rounded-4 custom-shadow p-2 px-4"
+          className="p-2 px-4 border border-light rounded-4 custom-shadow"
           style={{
             marginTop: "2vh",
             marginLeft: "7vw",
             marginRight: "7vw",
           }}
         >
-          <h2 className="container text-center mb-3 py-2">Log In to DevNotes</h2>
+          <h2 className="container py-2 mb-3 text-center">Log In to DevNotes</h2>
           <form>
-            <div className="form-floating mb-3 ">
+            <div className="mb-3 form-floating ">
               <input
                 type="email"
                 className="form-control rounded-4 bg-opacity-10"
@@ -91,10 +91,10 @@ const Login = () => {
               />
               <label htmlFor="floatingInput">Email address</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3 form-floating">
               <input
                 type="password"
-                className="form-control  rounded-4  bg-opacity-10"
+                className="form-control rounded-4 bg-opacity-10"
                 id="password"
                 name="password"
                 value={userData.password}
@@ -104,7 +104,7 @@ const Login = () => {
               <label htmlFor="floatingPassword">Password</label>
             </div>
 
-            <div className="flex justify-content-between py-2">
+            <div className="flex py-2 justify-content-between">
               <div>
                 <button
                   type="submit"
@@ -118,7 +118,7 @@ const Login = () => {
               <div className="py-2">
                 <p>
                   Don't have an Account?
-                  <Link type="submit" className="custom-link mx-1" to="/signup">
+                  <Link type="submit" className="mx-1 custom-link" to="/signup">
                     <b> Sign Up Here</b>
                   </Link>
                 </p>

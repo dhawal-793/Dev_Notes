@@ -1,14 +1,14 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import About from "./components/About";
+import Navbar from "./components/navigation/Navbar";
+import Home from "./pages/Home";
+import About from "./pages/About";
 import Footer from "./components/Footer";
-import Textutils from "./components/Textutils";
+import Textutils from "./pages/Textutils";
 import NoteState from "./context/Notes/noteState";
 import { Route, Routes } from "react-router-dom";
 import UserState from "./context/Users/userState";
-import SIgnup from "./components/SIgnup";
-import Login from "./components/Login";
+import SIgnup from "./pages/SIgnup";
+import Login from "./pages/Login";
 
 const App = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import noteContext from "../context/Notes/noteContext";
+import noteContext from "../../context/Notes/noteContext";
 
 const Editnote = (props) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
