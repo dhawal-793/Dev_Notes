@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import noteContext from "../context/Notes/noteContext";
-import Alert from "./Alert";
-import Notes from "./Notes";
+import Alert from "../components/Alert";
+import Notes from "../components/notes/Notes";
 
 const Home = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -19,7 +19,7 @@ const Home = () => {
   return (
     <>
       <div
-        className=" relative sticky-top "
+        className="relative sticky-top"
         style={{
           minHeight: "2vh",
           maxHeight: "2.1vh",

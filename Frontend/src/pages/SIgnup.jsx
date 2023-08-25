@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import userContext from "../context/Users/userContext";
-import Alert from "./Alert";
+import Alert from "../components/Alert";
 
 const SIgnup = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -49,7 +49,7 @@ const SIgnup = () => {
   return (
     <div className="custom-text">
       <div
-        className=" relative sticky-top "
+        className="relative sticky-top"
         style={{
           minHeight: "2vh",
           maxHeight: "2.1vh",
@@ -70,23 +70,23 @@ const SIgnup = () => {
 
       <div className="pb-2">
         <div className="container text-center lh-lg ">
-            <h1 className="fw-bold container">
+            <h1 className="container fw-bold">
               <i> Ur Notes </i>
             </h1>
             <p className="fs-6">Your Notes secured on the cloud</p>
           </div>
-        <div className=" border border-light rounded-4 custom-shadow p-2 px-4" style={{
+        <div className="p-2 px-4 border border-light rounded-4 custom-shadow" style={{
           marginTop: "2vh",
           marginLeft: "7vw",
           marginRight: "7vw",
         }}>
         
 
-          <h2 className="container text-center mb-3 py-2">
+          <h2 className="container py-2 mb-3 text-center">
             Sign Up to DevNotes
           </h2>
           <form>
-            <div className="form-floating mb-2 ">
+            <div className="mb-2 form-floating ">
               <input
                 type="text"
                 className="form-control rounded-4 bg-opacity-10"
@@ -98,7 +98,7 @@ const SIgnup = () => {
               />
               <label htmlFor="floatingInput">Full Name</label>
             </div>
-            <div className="form-floating mb-3 ">
+            <div className="mb-3 form-floating ">
               <input
                 type="email"
                 className="form-control rounded-4 bg-opacity-10"
@@ -110,10 +110,10 @@ const SIgnup = () => {
               />
               <label htmlFor="floatingInput">Email address</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className="mb-3 form-floating">
               <input
                 type="password"
-                className="form-control  rounded-4  bg-opacity-10"
+                className="form-control rounded-4 bg-opacity-10"
                 id="password"
                 name="password"
                 value={userData.password}
@@ -123,10 +123,10 @@ const SIgnup = () => {
               <label htmlFor="floatingPassword">Password</label>
             </div>
 
-            <div className="form-floating mb-3">
+            <div className="mb-3 form-floating">
               <input
                 type="password"
-                className="form-control  rounded-4  bg-opacity-10"
+                className="form-control rounded-4 bg-opacity-10"
                 id="cpassword"
                 name="cpassword"
                 value={userData.cpassword}
@@ -150,7 +150,7 @@ const SIgnup = () => {
               <div className="py-2">
                 <p>
                   Have an Account?
-                  <Link type="submit" className="custom-link mx-1" to="/login">
+                  <Link type="submit" className="mx-1 custom-link" to="/login">
                     <b> Log In Here</b>
                   </Link>
                 </p>
