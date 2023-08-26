@@ -1,258 +1,31 @@
-import React, { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import Logo from "../../Logo_Icons/DevNotes-32.png";
-import Menu from "../../Logo_Icons/Menu-32.png";
-const Navbar = (props) => {
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+import { useState } from 'react';
+import HamBurgerMenu from './HamBurgerMenu';
+import Navigation from './Navigation';
 
-  // VARIABLES
-  const location = useLocation();
-  const navigate = useNavigate();
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-  // METHODS
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
-  useEffect(() => { }, [location]);
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-  // RETURN
-
+const Navbar = () => {
+  const [navOpen, setNavOpen] = useState(false);
+  const handleClick = () => {
+    setNavOpen(prevValue => !prevValue)
+  }
   return (
-    <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-custom">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          <img src={Logo} alt="" />
-          {props.title}
-        </Link>
-        <span
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <img src={Menu} alt="" />
-          {/* <i className="fa-solid fa-bars"></i> */}
-        </span>
+    <>
+      <div className='fixed w-full max-w-[100vw] h-16 bg-gray-900 z-50'>
+        <div className='flex items-center justify-between h-full px-3 mx-auto md:px-1 max-w-screen-2xl md:gap-20'>
+          <div className=' text-[2.2rem] text duration-500 font-semibold group cursor-pointer'>
+            <p className='animatedHeading font-signature'>
+              <span className='text-transparent'>Dev</span>
+              <span className='text-transparent'>Notes</span>
+            </p>
+          </div>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="mb-2 navbar-nav me-auto mb-lg-0">
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${location.pathname === "/" ? "active" : ""
-                  }`}
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${location.pathname === "/textutils" ? "active" : ""
-                  }`}
-                to="/textutils"
-              >
-                TextUtils
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${location.pathname === "/about" ? "active" : ""
-                  }`}
-                to="/about"
-              >
-                About Us
-              </Link>
-            </li>
-          </ul>
-          {localStorage.getItem("token") ? (
-            <button className="p-2 m-0 btn-sm btn-bg-custom" onClick={logout}>
-              <i className="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Logout
-            </button>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="p-2 mx-1 link-btn-bg-custom nav-item btn-sm"
-                role="button"
-              >
-                <i className="fa-solid fa-arrow-right-to-bracket"></i>&nbsp; Login
-              </Link>
-
-              <Link
-                to="/signup"
-                className="p-2 mx-1 link-btn-bg-custom btn-sm"
-                role="button"
-              >
-                <i className="fa-solid fa-user-plus"></i>&nbsp; SignUp
-              </Link>
-            </>
-          )}
+          <Navigation ulClass="hidden md:flex flex-1 justify-between" liClass="" />
+          <HamBurgerMenu handleClick={handleClick} navOpen={navOpen} />
+          <Navigation handleClick={handleClick} ulClass={` duration-500 ${navOpen ? "translate-x-0" : "translate-x-80 "} flex flex-col h-screen bg-gray-800 w-60 top-0 right-0 absolute items-center justify-between gap-10 pb-8 pt-24`} liClass=" my-4 py-1 px-0 border-b-2 border-b-gray-500" />
         </div>
       </div>
-    </nav>
-  );
-};
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-// EXPORT
+      <div className="h-16" />
+    </>
+  )
+}
 
 export default Navbar;
-
-/*
-
-<a className="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-  Link with href
-</a>
-<button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-  Button with data-bs-target
-</button>
-
-<div className="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
-    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div className="offcanvas-body">
-    <div>
-      Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-    </div>
-    <div className="mt-3 dropdown">
-      <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-        Dropdown button
-      </button>
-      <ul className="dropdown-menu">
-        <li><a className="dropdown-item" href="#">Action</a></li>
-        <li><a className="dropdown-item" href="#">Another action</a></li>
-        <li><a className="dropdown-item" href="#">Something else here</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-<span
-  className="navbar-toggler"
-  type="button"
-  data-bs-toggle="collapse"
-  data-bs-target="#navbarSupportedContent"
-  aria-controls="navbarSupportedContent"
-  aria-expanded="false"
-  aria-label="Toggle navigation"
->
-  <img src={Menu} alt="" />
-  // <i className="fa-solid fa-bars"></i> 
-</span>
-
-<button className="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-  Toggle static offcanvas
-</button>
-
-<div className="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
-  <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
-    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div className="offcanvas-body">
-    <div>
-      I will not close if you click outside of me.
-    </div>
-  </div>
-</div>
-
-
-
-<button className="btn btn-primary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">Toggle offcanvas</button>
-
-<div className="alert alert-info d-none d-lg-block">Resize your browser to show the responsive offcanvas toggle.</div>
-
-<div className="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
-  <div className="offcanvas-header">
-    <h5 className="offcanvas-title" id="offcanvasResponsiveLabel"> <Link className="navbar-brand" to="/">
-          <img src={Logo} alt="" />
-          {props.title}
-        </Link></h5>
-    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive" aria-label="Close"></button>
-  </div>
-  <div className="offcanvas-body">
-     <ul className="mb-2 navbar-nav me-auto mb-lg-0">
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/" ? "active" : ""
-                }`}
-                to="/"
-              >
-                Home
-              </Link>
-            </li>
-
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/textutils" ? "active" : ""
-                }`}
-                to="/textutils"
-              >
-                TextUtils
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={`nav-link ${
-                  location.pathname === "/about" ? "active" : ""
-                }`}
-                to="/about"
-              >
-                About Us
-              </Link>
-            </li>
-          </ul>
-          <form>
-            {localStorage.getItem("token") ? (
-              <button className="m-0 btn-sm btn-bg-custom" onClick={logout}>
-                <i className="fa-solid fa-arrow-right-to-bracket"></i> Logout
-              </button>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="mx-1 link-btn-bg-custom nav-item btn-sm"
-                  role="button"
-                >
-                  <i className="fa-solid fa-arrow-right-to-bracket"></i> Login
-                </Link>
-
-                <Link
-                  to="/signup"
-                  className="mx-1 link-btn-bg-custom btn-sm"
-                  role="button"
-                >
-                  <i className="fa-solid fa-user-plus"></i> SignUp
-                </Link>
-              </>
-            )}
-          </form>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-*/
