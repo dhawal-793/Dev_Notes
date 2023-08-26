@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./userContext";
+import { toast } from 'react-hot-toast'
 
 const UserState = (props) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -10,31 +11,31 @@ const UserState = (props) => {
   const host = import.meta.env.VITE_HOST;
   console.log(host);
   const navigate = useNavigate();
-  const [alert, setAlert] = useState({
-    show: false,
-    type: "",
-    message: "",
-  });
+  // const [alert, setAlert] = useState({
+  //   show: false,
+  //   type: "",
+  //   message: "",
+  // });
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   // METHODS
 
-  const toggleAlert = (recievedmessage, recievedtype) => {
-    setAlert({
-      show: true,
-      message: recievedmessage,
-      type: recievedtype,
-    });
-    setTimeout(() => {
-      setAlert({
-        message: "",
-        type: "",
-        show: false,
-      });
-    }, 4000);
-  };
+  // const toggleAlert = (recievedmessage, recievedtype) => {
+  //   setAlert({
+  //     show: true,
+  //     message: recievedmessage,
+  //     type: recievedtype,
+  //   });
+  //   setTimeout(() => {
+  //     setAlert({
+  //       message: "",
+  //       type: "",
+  //       show: false,
+  //     });
+  //   }, 4000);
+  // };
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -53,9 +54,12 @@ const UserState = (props) => {
     if (json.success) {
       // localStorage.setItem('token'.json.authToken)
       navigate("/login");
-      toggleAlert(json.message, "success");
+      // toggleAlert(json.message, "success");
+      toast.success(json.message)
+      
     } else {
-      toggleAlert(json.message, "danger");
+      toast.error(json.message)
+      // toggleAlert(json.message, "danger");
     }
   };
 
@@ -76,10 +80,12 @@ const UserState = (props) => {
     if (json.success) {
       // setAuthToken(json.authToken);
       localStorage.setItem("token", json.authToken);
-      toggleAlert(json.message, "success");
+      // toggleAlert(json.message, "success");
+      toast.success(json.message)
       navigate("/");
     } else {
-      toggleAlert(json.message, "danger");
+      toast.error(json.message)
+      // toggleAlert(json.message, "danger");
     }
   };
 
@@ -89,7 +95,7 @@ const UserState = (props) => {
   // RETURN
 
   return (
-    <UserContext.Provider value={{ signUp, logIn, alert }}>
+    <UserContext.Provider value={{ signUp, logIn }}>
       {props.children}
     </UserContext.Provider>
   );
