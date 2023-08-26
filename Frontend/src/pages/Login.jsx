@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import userContext from "../context/Users/userContext";
-import Alert from "../components/Alert";
 
 const Login = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -10,7 +9,7 @@ const Login = () => {
   // VARIABLES
 
   const context = useContext(userContext);
-  const { logIn, alert } = context;
+  const { logIn } = context;
 
   const [userData, setUserData] = useState({
     email: "",
@@ -42,20 +41,7 @@ const Login = () => {
   // RETURN
 
   return (
-    <div className="custom-text">
-      <div
-        className="relative sticky-top"
-        style={{
-          minHeight: "2vh",
-          maxHeight: "2.1vh",
-          // zIndex:"99",
-          paddingTop: "2rem",
-          marginTop: "1.9rem",
-        }}
-      >
-        {alert.show && <Alert type={alert.type} message={alert.message} />}
-      </div>
-
+    <div className="w-full">
       <div
         style={{
           paddingTop: "7vh",
@@ -70,7 +56,7 @@ const Login = () => {
           <p className="fs-6">Your Notes secured on the cloud</p>
         </div>
         <div
-          className="p-2 px-4 border border-light rounded-4 custom-shadow"
+          className="p-2 px-4 border border-light rounded-4 custom-shadow "
           style={{
             marginTop: "2vh",
             marginLeft: "7vw",
@@ -127,7 +113,7 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <div className="py-3"> </div>
+      {/* <div className="py-3"> </div> */}
     </div>
   );
 };

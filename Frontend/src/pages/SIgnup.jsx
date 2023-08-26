@@ -1,8 +1,7 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import userContext from "../context/Users/userContext";
-import Alert from "../components/Alert";
 
 const SIgnup = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -11,7 +10,7 @@ const SIgnup = () => {
   // VARIABLES
 
   const context = useContext(userContext);
-  const { signUp, alert } = context;
+  const { signUp } = context;
 
   const [userData, setUserData] = useState({
     name: "",
@@ -48,39 +47,25 @@ const SIgnup = () => {
 
   return (
     <div className="custom-text">
-      <div
-        className="relative sticky-top"
-        style={{
-          minHeight: "2vh",
-          maxHeight: "2.1vh",
-          // zIndex:"99",
-          paddingTop: "2rem",
-          marginTop: "1.6rem",
-        }}
-      >
-        {alert.show && <Alert type={alert.type} message={alert.message} />}
-      </div>
-
-
-      <div  style={{
-        paddingTop:"7vh"
+      <div style={{
+        paddingTop: "7vh"
       }}>
 
       </div>
 
       <div className="pb-2">
         <div className="container text-center lh-lg ">
-            <h1 className="container fw-bold">
-              <i> Ur Notes </i>
-            </h1>
-            <p className="fs-6">Your Notes secured on the cloud</p>
-          </div>
+          <h1 className="container fw-bold">
+            <i> Ur Notes </i>
+          </h1>
+          <p className="fs-6">Your Notes secured on the cloud</p>
+        </div>
         <div className="p-2 px-4 border border-light rounded-4 custom-shadow" style={{
           marginTop: "2vh",
           marginLeft: "7vw",
           marginRight: "7vw",
         }}>
-        
+
 
           <h2 className="container py-2 mb-3 text-center">
             Sign Up to DevNotes
@@ -157,8 +142,8 @@ const SIgnup = () => {
               </div>
             </div>
           </form>
-          </div>
-          </div>
+        </div>
+      </div>
       <div className="py-3"> </div>
     </div>
   );

@@ -9,6 +9,7 @@ import { Route, Routes } from "react-router-dom";
 import UserState from "./context/Users/userState";
 import SIgnup from "./pages/SIgnup";
 import Login from "./pages/Login";
+import ToastProvider from "./providers/ToastProvider";
 
 const App = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -19,9 +20,8 @@ const App = () => {
     <>
       <UserState>
         <NoteState>
+          <ToastProvider/>
           <Navbar title={"DevNotes"} />
-
-          {/* <Alert message="APP STARTED" type="success"/> */}
           <div className="container">
             <Routes>
               <Route exact path="/" element={<Home />} />
