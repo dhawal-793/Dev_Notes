@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import noteContext from "../context/Notes/noteContext";
-import Alert from "../components/Alert";
 import Notes from "../components/notes/Notes";
 
 const Home = () => {
@@ -8,30 +5,15 @@ const Home = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   // VARIBLES
-
-  const context = useContext(noteContext);
-  const { alert } = context;
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   // RETURN
 
   return (
-    <>
-      <div
-        className="relative sticky-top"
-        style={{
-          minHeight: "2vh",
-          maxHeight: "2.1vh",
-          // zIndex:"99",
-          paddingTop: "4rem",
-          marginTop: "4rem",
-        }}
-      >
-        {alert.show && <Alert type={alert.type} message={alert.message} />}
-      </div>
+    <div className="relative w-full h-full">
       <Notes />
-    </>
+    </div>
   );
 };
 
