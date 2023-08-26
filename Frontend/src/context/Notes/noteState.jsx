@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import NoteContext from "./noteContext";
+import { toast } from "react-hot-toast";
+import { AlertCircle } from "lucide-react"
 const NoteState = (props) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -10,32 +12,34 @@ const NoteState = (props) => {
   console.log(host);
   const initialNotes = [];
   const [notes, setNotes] = useState(initialNotes);
-  const [alert, setAlert] = useState({
-    show: false,
-    type: "",
-    message: "",
-  });
+
+  const WarningIcon = <AlertCircle className="text-yellow-400" size={22} />
+  // const [alert, setAlert] = useState({
+  //   show: false,
+  //   type: "",
+  //   message: "",
+  // });
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   // METHODS
 
-  const toggleAlert = (recievedmessage, recievedtype) => {
-    setAlert({
-      message: recievedmessage,
-      type: recievedtype,
-      show: true,
-    });
-    setTimeout(() => {
-      setAlert({
-        message: "",
-        type: "",
-        show: false,
-      });
-    }, 4000);
-  };
-  
+  // const toggleAlert = (recievedmessage, recievedtype) => {
+  //   setAlert({
+  //     message: recievedmessage,
+  //     type: recievedtype,
+  //     show: true,
+  //   });
+  //   setTimeout(() => {
+  //     setAlert({
+  //       message: "",
+  //       type: "",
+  //       show: false,
+  //     });
+  //   }, 4000);
+  // };
+
   const fetchNotes = async () => {
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: "GET",
@@ -64,20 +68,17 @@ const NoteState = (props) => {
       (description === "" || description === " ") &&
       (title === "" || title === " ")
     ) {
-      toggleAlert("Title and Description required", "warning");
+      toast("Title and Description required", { icon: WarningIcon });
     } else if (title === "" || title === " ") {
-      toggleAlert("Title required", "warning");
+      toast("Title required", { icon: WarningIcon });
     } else if (description === "" || description === " ") {
-      toggleAlert("Description required", "warning");
+      toast("Description required", { icon: WarningIcon });
     } else if (dlength < 10 && tlength < 3) {
-      toggleAlert(
-        "Description must be 10 characters long and title must be 3 characters long",
-        "warning"
-      );
+      toast("Description must be 10 characters long and title must be 3 characters long", { icon: <AlertCircle className="text-yellow-400" size={45} /> });
     } else if (dlength < 10) {
-      toggleAlert("Description must be 10 characters ", "warning");
+      toast("Description must be 10 characters ", { icon: WarningIcon });
     } else if (tlength < 3) {
-      toggleAlert("Title must be 3 characters long", "warning");
+      toast("Title must be 3 characters long", { icon: WarningIcon });
     } else {
       const response = await fetch(`${host}/api/notes/addnote`, {
         method: "POST",
@@ -89,10 +90,10 @@ const NoteState = (props) => {
       });
       const json = await response.json();
       if (json.success) {
-        toggleAlert(json.message, "success");
+        toast.success(json.message);
         fetchNotes();
       } else {
-        toggleAlert(json.message, "danger");
+        toast.error(json.message);
       }
     }
   };
@@ -108,6 +109,8 @@ const NoteState = (props) => {
       description: noteObject.editdescription.trim(),
       tag: noteObject.edittag.trim(),
     };
+    const dlength = editednote.description.length;
+    const tlength = editednote.title.length;
     editednote.tag =
       editednote.tag === "" || editednote.tag === " "
         ? "general"
@@ -116,14 +119,20 @@ const NoteState = (props) => {
       (editednote.description === "" || editednote.description === " ") &&
       (editednote.title === "" || editednote.title === " ")
     ) {
-      toggleAlert("Title and Description required", "warning");
+      toast("Title and Description required", { icon: WarningIcon });
     } else if (editednote.title === "" || editednote.title === " ") {
-      toggleAlert("Title required", "warning");
+      toast("Title required", { icon: WarningIcon });
     } else if (
       editednote.description === "" ||
       editednote.description === " "
     ) {
-      toggleAlert("Description required", "warning");
+      toast("Description required", { icon: WarningIcon });
+    } else if (dlength < 10 && tlength < 3) {
+      toast("Description must be 10 characters long and title must be 3 characters long", { icon: <AlertCircle className="text-yellow-400" size={45} /> });
+    } else if (dlength < 10) {
+      toast("Description must be 10 characters ", { icon: WarningIcon });
+    } else if (tlength < 3) {
+      toast("Title must be 3 characters long", { icon: WarningIcon });
     } else {
       const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
         method: "PUT",
@@ -135,10 +144,10 @@ const NoteState = (props) => {
       });
       const json = await response.json();
       if (json.success) {
-        toggleAlert(json.message, "success");
+        toast.success(json.message);
         fetchNotes();
       } else {
-        toggleAlert(json.message, "danger");
+        toast.error(json.message);
       }
     }
   };
@@ -158,10 +167,10 @@ const NoteState = (props) => {
     });
     const json = await response.json();
     if (json.success) {
-      toggleAlert(json.message, "success");
+      toast.success(json.message);
       fetchNotes();
     } else {
-      toggleAlert(json.message, "danger");
+      toast.error(json.message);
     }
   };
 
@@ -172,7 +181,7 @@ const NoteState = (props) => {
 
   return (
     <NoteContext.Provider
-      value={{ notes, editNote, addNote, deleteNote, fetchNotes, alert }}
+      value={{ notes, editNote, addNote, deleteNote, fetchNotes }}
     >
       {props.children}
     </NoteContext.Provider>
