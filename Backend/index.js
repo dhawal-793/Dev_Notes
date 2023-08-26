@@ -13,7 +13,6 @@ app.use(cors(
   {
     origin: ["http://localhost:3000", process.env.FRONTEND],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Authorization', 'Content-Type'],
   }
 ));
 
