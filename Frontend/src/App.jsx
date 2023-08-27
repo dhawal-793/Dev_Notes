@@ -20,16 +20,18 @@ const App = () => {
     <>
       <UserState>
         <NoteState>
-          <ToastProvider/>
+          <ToastProvider />
           <Navbar title={"DevNotes"} />
-          <div className="container">
-            <Routes>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/about" element={<About />} />
-              <Route exact path="/textutils" element={<Textutils />} />
-              <Route exact path="/signup" element={<SIgnup />} />
-              <Route exact path="/login" element={<Login />} />
-            </Routes>
+          <div className="w-full ">
+            <div className="max-w-screen-xl pt-20 mx-auto">
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/about" element={<About />} />
+                <Route exact path="/textutils" element={<Textutils />} />
+                <Route exact path="/signup" element={<SIgnup />} />
+                <Route exact path="/login" element={<Login />} />
+              </Routes>
+            </div>
           </div>
           <Footer />
         </NoteState>
