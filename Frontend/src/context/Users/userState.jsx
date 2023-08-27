@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./userContext";
 import { toast } from 'react-hot-toast'
@@ -9,7 +8,6 @@ const UserState = (props) => {
   // VARIABLES
 
   const host = import.meta.env.VITE_HOST;
-  console.log(host);
   const navigate = useNavigate();
   // const [alert, setAlert] = useState({
   //   show: false,

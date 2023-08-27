@@ -9,7 +9,6 @@ const NoteState = (props) => {
   // VARIABLES
 
   const host = import.meta.env.VITE_HOST;
-  console.log(host);
   const initialNotes = [];
   const [notes, setNotes] = useState(initialNotes);
 
