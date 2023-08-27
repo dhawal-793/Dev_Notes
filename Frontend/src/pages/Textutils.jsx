@@ -155,7 +155,7 @@ const Textutils = () => {
     navigate("/login");
   } else {
     return (
-      <div className="m-2 py-5">
+      <>
         {/* <div
         className="py-4"
         style={{
@@ -166,7 +166,7 @@ const Textutils = () => {
         }}
       >
       </div> */}
-        <h3 className="my-3 text-center">
+        <h3 className="mb-3 text-center">
           TextUtils: Analyzer, Manipulate, Update Text
         </h3>
 
@@ -178,18 +178,18 @@ const Textutils = () => {
           right: "110px",
         }}
       >
-        <button className="btn my-2 my-sm-0" type="button" onClick={toggleMode}>
+        <button className="my-2 btn my-sm-0" type="button" onClick={toggleMode}>
           <img
             src={mode === "light" ? light : dark}
             alt=""
             width="30"
             height="34"
-            className="d-inline-block align-text-top"
+            className="align-text-top d-inline-block"
             onClick={toggleMode}
           />
         </button>
       </div> */}
-        <div className="container mt-4 pt-4">
+        <div className="container pt-4 mt-4">
           <textarea
             className="form-control"
             id="exampleFormControlTextarea1"
@@ -205,7 +205,7 @@ const Textutils = () => {
             }}
           ></textarea>
         </div>
-        <div className="container  ">
+        <div className="container ">
           <center>
             <button
               type="button"
@@ -338,7 +338,7 @@ const Textutils = () => {
           <p id="preview2">{preview_text2}</p>
           <pre>{}</pre>
         </div>
-      </div>
+      </>
     );
   }
 };
