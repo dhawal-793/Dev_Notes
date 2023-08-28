@@ -10,5 +10,11 @@ export default defineConfig(() => {
     server: {
       port: 3000,
     },
+    resolve: {
+      alias: [
+        { find: /^@src/, replacement: '/src' },
+        // Add more alias mappings as needed
+      ]
+    }
   };
 });
