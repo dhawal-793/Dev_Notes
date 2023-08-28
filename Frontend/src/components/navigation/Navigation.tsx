@@ -1,4 +1,6 @@
-import { Link, useLocation } from 'react-router-dom'
+import { FC } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+
 import AuthLinks from './AuthLinks';
 
 const navLinks = [
@@ -19,15 +21,20 @@ const navLinks = [
     },
 ];
 
+interface NavigationProps {
+    ulClass: string;
+    liClass: string;
+    handleClick?: () => void;
+}
 
-const Navigation = ({ ulClass, liClass, handleClick }) => {
+const Navigation: FC<NavigationProps> = ({ ulClass, liClass, handleClick }) => {
 
-    const location = useLocation()
+    const location = useLocation();
+    
     return (
         <ul className={ulClass}>
             <ul className='flex flex-col items-center justify-start flex-1 gap-2 md:gap-5 md:flex-row'>
                 {navLinks.map(({ id, link, name }) => {
-
                     const isActive = location.pathname === link;
                     return (
                         <li key={id}
@@ -36,7 +43,6 @@ const Navigation = ({ ulClass, liClass, handleClick }) => {
                                 onClick={handleClick}
                                 to={link}> {name}
                             </Link>
-
                         </li>
                     )
                 })}

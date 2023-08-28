@@ -1,10 +1,8 @@
-import { LogIn, LogOut, UserPlus2 } from 'lucide-react';
-import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { LogIn, LogOut, UserPlus2 } from 'lucide-react';
 
 const AuthLinks = () => {
     const navigate = useNavigate();
-
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -15,7 +13,6 @@ const AuthLinks = () => {
         <>
             {
                 localStorage.getItem("token") ? (
-
                     <button onClick={logout} className={`py-1 px-2 rounded-lg capitalize font-medium cursor-pointer text-gray-500 hover:scale-[1.15] bg-gray-200  duration-500 hover:bg-gray-300 flex items-center gap-2`}>
                         <LogOut size={18} /> Logout
                     </button>
