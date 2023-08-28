@@ -1,18 +1,34 @@
-import { useState } from "react";
-import NoteContext from "./noteContext";
+import { FC, useState } from "react";
 import { toast } from "react-hot-toast";
 import { AlertCircle } from "lucide-react"
-const NoteState = (props) => {
+
+import { Note, EditedNote, NewNote } from "@/types"
+
+import NoteContext from "./noteContext";
+
+
+
+interface NoteStateProps {
+  children: React.ReactNode
+}
+
+const NoteState: FC<NoteStateProps> = ({ children }) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   // VARIABLES
-
+  
   const host = import.meta.env.VITE_HOST;
-  const initialNotes = [];
-  const [notes, setNotes] = useState(initialNotes);
-
+  const initialNotes: Note[] = [];
+  const [notes, setNotes] = useState<Note[]>(initialNotes);
+  
+  
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    "auth-token": localStorage.getItem("token") || "",
+  };
   const WarningIcon = <AlertCircle className="text-yellow-400" size={22} />
+  
   // const [alert, setAlert] = useState({
   //   show: false,
   //   type: "",
@@ -40,11 +56,12 @@ const NoteState = (props) => {
   // };
 
   const fetchNotes = async () => {
+    const headers: HeadersInit = {
+      "auth-token": localStorage.getItem("token") || "",
+    }
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: "GET",
-      headers: {
-        "auth-token": localStorage.getItem("token"),
-      },
+      headers
     });
     const json = await response.json();
     setNotes(json.notes);
@@ -55,7 +72,7 @@ const NoteState = (props) => {
 
   // ADD A NEW NOTE
 
-  const addNote = async (noteObject) => {
+  const addNote = async (noteObject: NewNote) => {
     let { title, description, tag } = noteObject;
     tag = tag.trim();
     title = title.trim();
@@ -81,10 +98,7 @@ const NoteState = (props) => {
     } else {
       const response = await fetch(`${host}/api/notes/addnote`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"),
-        },
+        headers,
         body: JSON.stringify({ title, tag, description }),
       });
       const json = await response.json();
@@ -102,8 +116,9 @@ const NoteState = (props) => {
 
   // EDIT AN EXISTING NOTE
 
-  const editNote = async (id, noteObject) => {
-    let editednote = {
+  const editNote = async (noteObject: EditedNote) => {
+    const id = noteObject.id
+    const editednote: NewNote = {
       title: noteObject.edittitle.trim(),
       description: noteObject.editdescription.trim(),
       tag: noteObject.edittag.trim(),
@@ -135,10 +150,7 @@ const NoteState = (props) => {
     } else {
       const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"),
-        },
+        headers,
         body: JSON.stringify(editednote),
       });
       const json = await response.json();
@@ -156,13 +168,10 @@ const NoteState = (props) => {
 
   // DELETE AN EXISTING NOTE
 
-  const deleteNote = async (id) => {
+  const deleteNote = async (id: string) => {
     const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"),
-      },
+      headers,
     });
     const json = await response.json();
     if (json.success) {
@@ -182,7 +191,7 @@ const NoteState = (props) => {
     <NoteContext.Provider
       value={{ notes, editNote, addNote, deleteNote, fetchNotes }}
     >
-      {props.children}
+      {children}
     </NoteContext.Provider>
   );
 };
