@@ -1,7 +1,15 @@
-import React, { useContext, useState, useEffect } from "react";
-import noteContext from "../../context/Notes/noteContext";
+import { FC, useContext, useState, useEffect, ChangeEvent, FormEvent, LegacyRef } from "react";
 
-const Editnote = (props) => {
+import noteContext from "@src/context/Notes/noteContext";
+import { EditedNote } from "@src/types";
+
+
+interface EditNoteProps {
+  note: EditedNote
+  reference: LegacyRef<HTMLButtonElement>
+}
+
+const Editnote: FC<EditNoteProps> = (props) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -9,7 +17,7 @@ const Editnote = (props) => {
 
   const context = useContext(noteContext);
   const { editNote } = context;
-  const [note, setNote] = useState({
+  const [note, setNote] = useState<EditedNote>({
     id: "",
     edittitle: "",
     editdescription: "",
@@ -20,18 +28,21 @@ const Editnote = (props) => {
 
   // METHODS
 
+  const saveNote = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    editNote(note);
+  };
+  const onchange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
+  const onDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
+  
   useEffect(() => {
     setNote(props.note);
   }, [props.note]);
-
-  const saveNote = (e) => {
-    e.preventDefault();
-    editNote(note.id, note);
-  };
-  const onchange = (e) => {
-    setNote({ ...note, [e.target.name]: e.target.value });
-  };
-
+  
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -52,7 +63,7 @@ const Editnote = (props) => {
       <div
         className="modal fade"
         id="exampleModal"
-        tabIndex="-1"
+        tabIndex={-1}
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -71,7 +82,7 @@ const Editnote = (props) => {
             </div>
             <div className="modal-body">
               <form>
-                <div className="row g-3 align-items-center mb-3">
+                <div className="mb-3 row g-3 align-items-center">
                   <div className="col-auto">
                     <label htmlFor="edittitle" className="form-label">
                       Title
@@ -106,15 +117,15 @@ const Editnote = (props) => {
                     />
                   </div>
                 </div>
-                <div className="row g-3 align-items-center mb-3"></div>
+                <div className="mb-3 row g-3 align-items-center"></div>
                 <textarea
                   className="form-control"
-                  rows="10"
-                  cols="10"
+                  rows={10}
+                  cols={10}
                   id="editdescription"
                   name="editdescription"
                   placeholder="Write your notes here"
-                  onChange={onchange}
+                  onChange={onDescriptionChange}
                   value={note.editdescription}
                   required={true}
                 ></textarea>
