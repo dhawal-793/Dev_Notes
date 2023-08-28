@@ -1,12 +1,15 @@
 import { useState } from 'react';
+
 import HamBurgerMenu from './HamBurgerMenu';
 import Navigation from './Navigation';
 
 const Navbar = () => {
-  const [navOpen, setNavOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState<boolean>(false);
+  
   const handleClick = () => {
     setNavOpen(prevValue => !prevValue)
   }
+  
   return (
     <>
       <div className='fixed w-full max-w-[100vw] h-16 bg-gray-900 z-50'>
@@ -17,7 +20,6 @@ const Navbar = () => {
               <span className='text-transparent'>Notes</span>
             </p>
           </div>
-
           <Navigation ulClass="hidden md:flex flex-1 justify-between" liClass="" />
           <HamBurgerMenu handleClick={handleClick} navOpen={navOpen} />
           <Navigation handleClick={handleClick} ulClass={` duration-500 ${navOpen ? "translate-x-0" : "translate-x-80 "} flex flex-col h-screen bg-gray-800 w-60 top-0 right-0 absolute items-center justify-between gap-10 pb-8 pt-24`} liClass=" my-4 py-1 px-0 border-b-2 border-b-gray-500" />

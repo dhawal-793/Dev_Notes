@@ -1,6 +1,9 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import noteContext from "../../context/Notes/noteContext";
+
+import noteContext from "@src/context/Notes/noteContext";
+import { Note } from "@src/types";
+
 import Addnote from "./Addnote";
 import Editnote from "./Editnote";
 import NoteItem from "./Noteitem";
@@ -12,7 +15,7 @@ const Notes = () => {
   // VARIABLES
   const context = useContext(noteContext);
   const navigate = useNavigate();
-  const ref = useRef(null);
+  const ref = useRef<HTMLButtonElement | null>(null);
   const { notes, fetchNotes } = context;
   const [note, setNote] = useState({
     id: "",
@@ -26,6 +29,16 @@ const Notes = () => {
 
   // METHODS
 
+  const updateNote = (note: Note) => {
+    setNote({
+      id: note._id,
+      edittitle: note.title,
+      editdescription: note.description,
+      edittag: note.tag,
+    });
+    ref?.current?.click();
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       fetchNotes();
@@ -34,17 +47,7 @@ const Notes = () => {
     }
     // eslint-disable-next-line
   }, []);
-
-  const updateNote = (note) => {
-    setNote({
-      id: note._id,
-      edittitle: note.title,
-      editdescription: note.description,
-      edittag: note.tag,
-    });
-    ref.current.click();
-  };
-
+  
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -66,13 +69,13 @@ const Notes = () => {
           <div className="row">
             {notes.map((note) => {
               return (
-                <div className="col-sm-12 col-md-6 col-lg-4 p-2" key={note._id}>
+                <div className="p-2 col-sm-12 col-md-6 col-lg-4" key={note?._id}>
                   <NoteItem note={note} updateNote={updateNote} />
                 </div>
               );
             })}
           </div>
-          <div className="container mb-5 pb-5"></div>
+          <div className="container pb-5 mb-5"></div>
         </div>
       </div>
     </>

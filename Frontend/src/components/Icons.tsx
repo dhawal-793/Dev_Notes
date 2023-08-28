@@ -1,4 +1,10 @@
-function Hamburger({color="#6B7280"}) {
+import { FC } from 'react'
+
+interface IconProps {
+    color?: string;
+}
+
+const Hamburger: FC<IconProps> = ({ color = "#6B7280" }) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
             <path fill={color}
@@ -6,7 +12,7 @@ function Hamburger({color="#6B7280"}) {
         </svg>
     )
 }
-function Menu({color="#6B7280"}) {
+const Menu: FC<IconProps> = ({ color = "#6B7280" }) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" >
             <path fill={color}
@@ -14,7 +20,7 @@ function Menu({color="#6B7280"}) {
         </svg>
     )
 }
-function Cancel({ color }) {
+const Cancel: FC<IconProps> = ({ color }) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" >
             <path fill={color}

@@ -1,8 +1,14 @@
-import { useContext } from "react";
+import { FC, useContext } from "react";
 
-import noteContext from "../../context/Notes/noteContext";
+import noteContext from "@src/context/Notes/noteContext";
+import { Note } from "@src/types";
 
-const Noteitem = (props) => {
+interface NoteitemProps {
+  note: Note;
+  updateNote: (note: Note) => void;
+}
+
+const Noteitem: FC<NoteitemProps> = ({ note, updateNote }) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -10,7 +16,6 @@ const Noteitem = (props) => {
 
   const context = useContext(noteContext);
   const { deleteNote } = context;
-  const { note, updateNote } = props;
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -18,7 +23,7 @@ const Noteitem = (props) => {
 
   return (
     <div className="container ">
-      <div className="card custom-shadow py-3 mb-5 bg-body rounded">
+      <div className="py-3 mb-5 rounded card custom-shadow bg-body">
         <div
           style={{
             display: "flex",
@@ -40,7 +45,7 @@ const Noteitem = (props) => {
           }}
         >
           <i
-            className="fa-regular fa-pen-to-square mx-2 cursorPointer"
+            className="mx-2 fa-regular fa-pen-to-square cursorPointer"
             onClick={() => {
               updateNote(note);
             }}
@@ -55,14 +60,14 @@ const Noteitem = (props) => {
           }}
         >
           <i
-            className="fa-regular fa-trash-can mx-2 cursorPointer"
+            className="mx-2 fa-regular fa-trash-can cursorPointer"
             onClick={() => {
               deleteNote(note._id);
             }}
           ></i>
         </div>
-        <div className="card-body my-2">
-          <h4 className="card-title my-2">{note.title}</h4>
+        <div className="my-2 card-body">
+          <h4 className="my-2 card-title">{note.title}</h4>
           <p className="card-text">{note.description}</p>
         </div>
       </div>

@@ -1,5 +1,8 @@
-import { useState, useContext } from "react";
-import noteContext from "../../context/Notes/noteContext";
+import { useState, useContext, ChangeEvent, FormEvent } from "react";
+
+import noteContext from "@src/context/Notes/noteContext";
+import { NewNote } from "@srctypes";
+
 const Addnote = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -7,7 +10,7 @@ const Addnote = () => {
   // VARIABLES
   const context = useContext(noteContext);
   const { addNote } = context;
-  const [note, setNote] = useState({
+  const [note, setNote] = useState<NewNote>({
     title: "",
     description: "",
     tag: "",
@@ -18,11 +21,15 @@ const Addnote = () => {
 
   // METHODS
 
-  const onchange = (e) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNote({ ...note, [e.target.name]: e.target.value });
   };
 
-  const saveNote = (e) => {
+  const onDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setNote({ ...note, description: e.target.value });
+  };
+
+  const saveNote = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     addNote(note);
     setNote({
@@ -41,7 +48,7 @@ const Addnote = () => {
       <h3>Add a Note</h3>
       <form>
         <div
-          className="d-inline-flex input-group input-group-sm pr-5 my-3"
+          className="pr-5 my-3 d-inline-flex input-group input-group-sm"
           style={{ maxWidth: "280px" }}
         >
           <span className="input-group-text" id="inputGroup-sizing-sm">
@@ -52,7 +59,7 @@ const Addnote = () => {
             className="form-control"
             aria-label="Sizing example input"
             name="title"
-            onChange={onchange}
+            onChange={onInputChange}
             value={note.title}
             placeholder="Your Title"
             id="noteTitle"
@@ -60,9 +67,9 @@ const Addnote = () => {
             aria-describedby="inputGroup-sizing-sm"
           />
         </div>
-        <div className="d-inline-flex  mx-2"></div>
+        <div className="mx-2 d-inline-flex"></div>
         <div
-          className="d-inline-flex input-group input-group-sm my-3"
+          className="my-3 d-inline-flex input-group input-group-sm"
           style={{ maxWidth: "280px" }}
         >
           <span className="input-group-text" id="inputGroup-sizing-sm">
@@ -75,7 +82,7 @@ const Addnote = () => {
             name="tag"
             placeholder="general"
             value={note.tag}
-            onChange={onchange}
+            onChange={onInputChange}
             id="noteTag"
             aria-describedby="inputGroup-sizing-sm"
           />
@@ -83,12 +90,12 @@ const Addnote = () => {
 
         <textarea
           className="form-control"
-          rows="10"
-          cols="10"
+          rows={10}
+          cols={10}
           id="description"
           name="description"
           placeholder="Write your notes here"
-          onChange={onchange}
+          onChange={onDescriptionChange}
           value={note.description}
           required={true}
         ></textarea>
@@ -96,14 +103,14 @@ const Addnote = () => {
         <div className="my-3 py2">
           <button
             type="submit"
-            className="btn-sm btn-bg-custom mr-3"
+            className="mr-3 btn-sm btn-bg-custom"
             onClick={saveNote}
           >
             Add Note
           </button>
           <button
-            type="submit"
-            className="btn-sm btn-bg-custom mx-3"
+            type="reset"
+            className="mx-3 btn-sm btn-bg-custom"
             onClick={() => {
               setNote({ ...note, title: "", description: "", tag: "general" });
             }}
