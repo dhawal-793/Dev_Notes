@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { toast } from "react-hot-toast";
 import { AlertCircle } from "lucide-react"
 
-import { Note, EditedNote, NewNote } from "@/types"
+import { Note, EditedNote, NewNote } from "@src/types"
 
 import NoteContext from "./noteContext";
 
