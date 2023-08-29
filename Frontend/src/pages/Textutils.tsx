@@ -12,9 +12,9 @@ const Textutils = () => {
   const [text, settext] = useState<string>("");
   const [preview_text1, setpreview_text1] = useState<string>("");
   const [preview_text2, setpreview_text2] = useState<string>("");
-  const [count_word, setcountword] = useState<string>("");
-  const [count_char, setcountchar] = useState<string>("");
-  const [count_sent, setcountsent] = useState<string>("");
+  // const [count_word, setcountword] = useState<string>("");
+  // const [count_char, setcountchar] = useState<string>("");
+  // const [count_sent, setcountsent] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -74,12 +74,12 @@ const Textutils = () => {
   };
   const handelReset = () => {
     settext("");
-    handelWordCount();
-    handelCharCount();
-    handelSentCount();
-    handelWordCount();
-    handelCharCount();
-    handelSentCount();
+    // handelWordCount();
+    // handelCharCount();
+    // handelSentCount();
+    // handelWordCount();
+    // handelCharCount();
+    // handelSentCount();
   };
   const handelCopy = () => {
     navigator.clipboard.writeText(text);
@@ -87,48 +87,48 @@ const Textutils = () => {
       text.length > 0 ? "Text copied to clipboard" : "Enter text below to copy"
     );
   };
-  const handelSentCount = () => {
-    const _text = text.replace(/\s+/g, " ").trim();
-    if (document.getElementById("count_sent").checked === true) {
-      let count = _text.split(".").length;
-      if (_text === "") {
-        count = 0;
-      }
-      setcountsent("Total number of sentances are : " + count);
-    } else {
-      setcountsent("");
-    }
-  };
-  const handelWordCount = () => {
-    const _text = text.replace(/\s+/g, " ").trim();
-    if (document?.getElementById("count_words").checked === true) {
-      if (_text === "") {
-        setcountword("Number of word is : 0");
-      } else {
-        const count = _text.split(" ").length;
-        if (count < 2) {
-          setcountword("Number of word is : " + count);
-        } else {
-          setcountword("Total number of words are : " + count);
-        }
-      }
-    } else {
-      setcountword("");
-    }
-  };
-  const handelCharCount = () => {
-    const _text = text.replace(/\s+/g, " ").trim();
-    if (document.getElementById("count_chars").checked === true) {
-      const count = _text.length;
-      if (count < 2) {
-        setcountchar("Number of character is : " + count);
-      } else {
-        setcountchar("Total number of characters are : " + count);
-      }
-    } else {
-      setcountchar("");
-    }
-  };
+  // const handelSentCount = () => {
+  //   const _text = text.replace(/\s+/g, " ").trim();
+  //   if (document.getElementById("count_sent").checked === true) {
+  //     let count = _text.split(".").length;
+  //     if (_text === "") {
+  //       count = 0;
+  //     }
+  //     setcountsent("Total number of sentances are : " + count);
+  //   } else {
+  //     setcountsent("");
+  //   }
+  // };
+  // const handelWordCount = () => {
+  //   const _text = text.replace(/\s+/g, " ").trim();
+  //   if (document?.getElementById("count_words").checked === true) {
+  //     if (_text === "") {
+  //       setcountword("Number of word is : 0");
+  //     } else {
+  //       const count = _text.split(" ").length;
+  //       if (count < 2) {
+  //         setcountword("Number of word is : " + count);
+  //       } else {
+  //         setcountword("Total number of words are : " + count);
+  //       }
+  //     }
+  //   } else {
+  //     setcountword("");
+  //   }
+  // };
+  // const handelCharCount = () => {
+  //   const _text = text.replace(/\s+/g, " ").trim();
+  //   if (document.getElementById("count_chars").checked === true) {
+  //     const count = _text.length;
+  //     if (count < 2) {
+  //       setcountchar("Number of character is : " + count);
+  //     } else {
+  //       setcountchar("Total number of characters are : " + count);
+  //     }
+  //   } else {
+  //     setcountchar("");
+  //   }
+  // };
   const handelPreview1 = () => {
     setpreview_text2("");
     setpreview_text1(
@@ -143,9 +143,9 @@ const Textutils = () => {
   };
   const textchange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     settext(e.target.value);
-    handelWordCount();
-    handelCharCount();
-    handelSentCount();
+    // handelWordCount();
+    // handelCharCount();
+    // handelSentCount();
   };
 
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -284,7 +284,7 @@ const Textutils = () => {
               Preview
             </button>
           </center>
-          <div className="custom-control custom-switch">
+          {/* <div className="custom-control custom-switch">
             <input
               type="checkbox"
               className="custom-control-input"
@@ -325,14 +325,14 @@ const Textutils = () => {
             >
               Count Sentances
             </label>
-          </div>
+          </div> */}
         </div>
-        <div className="container">
+        {/* <div className="container">
           <h3>Summary</h3>
           <p>{count_word}</p>
           <p>{count_char}</p>
           <p>{count_sent}</p>
-        </div>
+        </div> */}
         <div className="container">
           <pre id="preview1" style={currStyle}>
             {preview_text1}
