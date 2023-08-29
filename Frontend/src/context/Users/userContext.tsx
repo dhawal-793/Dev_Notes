@@ -7,11 +7,15 @@ import { NewUser, User } from "@srctypes";
 
 // VARIABLES
 
-const initialState = {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    signUp: (userData: NewUser) => { },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    logIn: (userData: User) => { },
+interface InitialStateType {
+    signUp: (userData: NewUser) => void;
+    logIn: (userData: User) => void;
+}
+
+
+const initialState: InitialStateType = {
+    signUp: () => { },
+    logIn: () => { },
 }
 
 
