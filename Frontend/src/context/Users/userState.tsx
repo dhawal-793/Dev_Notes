@@ -1,8 +1,16 @@
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
-import UserContext from "./userContext";
 import { toast } from 'react-hot-toast'
 
-const UserState = (props) => {
+import { User, NewUser } from "@srctypes";
+
+import UserContext from "./userContext";
+
+interface UserStateProps {
+  children: React.ReactNode
+}
+
+const UserState: FC<UserStateProps> = ({ children }) => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   // VARIABLES
@@ -40,7 +48,7 @@ const UserState = (props) => {
 
   // SIGNUP
 
-  const signUp = async (userData) => {
+  const signUp = async (userData: NewUser) => {
     const response = await fetch(`${host}/api/auth/createuser`, {
       method: "POST",
       headers: {
@@ -54,7 +62,7 @@ const UserState = (props) => {
       navigate("/login");
       // toggleAlert(json.message, "success");
       toast.success(json.message)
-      
+
     } else {
       toast.error(json.message)
       // toggleAlert(json.message, "danger");
@@ -66,7 +74,7 @@ const UserState = (props) => {
 
   // LOGIN
 
-  const logIn = async (userData) => {
+  const logIn = async (userData: User) => {
     const response = await fetch(`${host}/api/auth/login`, {
       method: "POST",
       headers: {
@@ -94,7 +102,7 @@ const UserState = (props) => {
 
   return (
     <UserContext.Provider value={{ signUp, logIn }}>
-      {props.children}
+      {children}
     </UserContext.Provider>
   );
 };
