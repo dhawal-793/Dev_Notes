@@ -8,8 +8,11 @@ const notes: Note[] = [];
 
 const initialData = {
     notes,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     editNote: (noteObject: EditedNote) => { },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     addNote: (note: NewNote) => { },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     deleteNote: (id: string) => { },
     fetchNotes: () => { },
 }

@@ -1,15 +1,17 @@
-import "./App.css";
-import Navbar from "./components/navigation/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Footer from "./components/Footer";
-import Textutils from "./pages/Textutils";
-import NoteState from "./context/Notes/noteState";
 import { Route, Routes } from "react-router-dom";
-import UserState from "./context/Users/userState";
-import SIgnup from "./pages/SIgnup";
-import Login from "./pages/Login";
-import ToastProvider from "./providers/ToastProvider";
+
+import NoteState from "@src/context/Notes/noteState";
+import UserState from "@src/context/Users/userState";
+import Navbar from "@src/components/navigation/Navbar";
+import Footer from "@src/components/Footer";
+import Login from "@src/pages/Login";
+import SIgnup from "@src/pages/SIgnup";
+import Home from "@src/pages/Home";
+import Textutils from "@src/pages/Textutils";
+import About from "@src/pages/About";
+import ToastProvider from "@src/providers/ToastProvider";
+
+import "./App.css";
 
 const App = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
@@ -21,15 +23,15 @@ const App = () => {
       <UserState>
         <NoteState>
           <ToastProvider />
-          <Navbar title={"DevNotes"} />
+          <Navbar />
           <div className="w-full ">
             <div className="max-w-screen-xl pt-20 mx-auto">
               <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/about" element={<About />} />
-                <Route exact path="/textutils" element={<Textutils />} />
-                <Route exact path="/signup" element={<SIgnup />} />
-                <Route exact path="/login" element={<Login />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/textutils" element={<Textutils />} />
+                <Route path="/signup" element={<SIgnup />} />
+                <Route path="/login" element={<Login />} />
               </Routes>
             </div>
           </div>

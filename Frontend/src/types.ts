@@ -15,3 +15,15 @@ export interface EditedNote {
   editdescription: string
   edittag: string
 }
+
+
+export interface User{
+  email:string
+  password: string
+}
+export interface NewUser{
+  name:string
+  email:string
+  password: string
+  cpassword: string
+}

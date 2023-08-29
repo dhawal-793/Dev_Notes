@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 // import light from "../Logo_Icons/lightmode.svg";
 // import dark from "../Logo_Icons/darkmode.svg";
@@ -9,12 +9,12 @@ const Textutils = () => {
   // VARIABLES
 
   // const [mode, setMode] = useState("light");
-  const [text, settext] = useState("");
-  const [preview_text1, setpreview_text1] = useState("");
-  const [preview_text2, setpreview_text2] = useState("");
-  const [count_word, setcountword] = useState("");
-  const [count_char, setcountchar] = useState("");
-  const [count_sent, setcountsent] = useState("");
+  const [text, settext] = useState<string>("");
+  const [preview_text1, setpreview_text1] = useState<string>("");
+  const [preview_text2, setpreview_text2] = useState<string>("");
+  const [count_word, setcountword] = useState<string>("");
+  const [count_char, setcountchar] = useState<string>("");
+  const [count_sent, setcountsent] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Textutils = () => {
   //     document.body.style.color = "rgb(0,0,0)";
   //   }
   // };
-  let currStyle = {
+  const currStyle = {
     // color: mode === "light" ? "black" : "white",
     color: "black",
   };
@@ -40,21 +40,23 @@ const Textutils = () => {
   // METHODS
 
   useEffect(() => {
+
     if (!localStorage.getItem("token")) navigate("/login");
     // eslint-disable-next-line
   }, []);
+
   const handelUperCase = () => {
-    let newtext = text.toUpperCase();
+    const newtext = text.toUpperCase();
     settext(newtext);
   };
   const handelLowerCase = () => {
-    let newtext = text.toLowerCase();
+    const newtext = text.toLowerCase();
     settext(newtext);
   };
   const handelCaptalize = () => {
-    let text1 = text.split(" ");
+    const wordsArray = text.split(" ");
     let newtext = "";
-    text1.forEach((element) => {
+    wordsArray.forEach((element) => {
       newtext +=
         element.substring(0, 1).toUpperCase() +
         element.substring(1).toLowerCase() +
@@ -63,11 +65,11 @@ const Textutils = () => {
     settext(newtext.slice(0, -1));
   };
   const handleExtraSpaces = () => {
-    let newtext = text.split(/[ ]+/);
+    const newtext = text.split(/[ ]+/);
     settext(newtext.join(" "));
   };
   const handleExtraLines = () => {
-    let newtext = text.replace(/\s+/g, " ").trim();
+    const newtext = text.replace(/\s+/g, " ").trim();
     settext(newtext);
   };
   const handelReset = () => {
@@ -86,7 +88,7 @@ const Textutils = () => {
     );
   };
   const handelSentCount = () => {
-    let _text = text.replace(/\s+/g, " ").trim();
+    const _text = text.replace(/\s+/g, " ").trim();
     if (document.getElementById("count_sent").checked === true) {
       let count = _text.split(".").length;
       if (_text === "") {
@@ -98,12 +100,12 @@ const Textutils = () => {
     }
   };
   const handelWordCount = () => {
-    let _text = text.replace(/\s+/g, " ").trim();
-    if (document.getElementById("count_words").checked === true) {
+    const _text = text.replace(/\s+/g, " ").trim();
+    if (document?.getElementById("count_words").checked === true) {
       if (_text === "") {
         setcountword("Number of word is : 0");
       } else {
-        let count = _text.split(" ").length;
+        const count = _text.split(" ").length;
         if (count < 2) {
           setcountword("Number of word is : " + count);
         } else {
@@ -115,9 +117,9 @@ const Textutils = () => {
     }
   };
   const handelCharCount = () => {
-    let _text = text.replace(/\s+/g, " ").trim();
+    const _text = text.replace(/\s+/g, " ").trim();
     if (document.getElementById("count_chars").checked === true) {
-      let count = _text.length;
+      const count = _text.length;
       if (count < 2) {
         setcountchar("Number of character is : " + count);
       } else {
@@ -139,8 +141,8 @@ const Textutils = () => {
       text.length > 0 ? text : "Enter text above to preview it here"
     );
   };
-  const textchange = (event) => {
-    settext(event.target.value);
+  const textchange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    settext(e.target.value);
     handelWordCount();
     handelCharCount();
     handelSentCount();
@@ -193,7 +195,7 @@ const Textutils = () => {
           <textarea
             className="form-control"
             id="exampleFormControlTextarea1"
-            rows="10"
+            rows={10}
             value={text}
             placeholder="Enter Your text here"
             onChange={textchange}
@@ -236,7 +238,7 @@ const Textutils = () => {
               className={`btn-sm btn-bg-custom m-2`}
               // className={`btn btn-${mode === "light" ? "dark" : "light"} m-2`}
               onClick={handleExtraSpaces}
-              // style={{padding:"2px"}}
+            // style={{padding:"2px"}}
             >
               Remove Extra Spaces
             </button>
@@ -261,7 +263,7 @@ const Textutils = () => {
               className={` btn-sm btn-bg-custom m-2`}
               // className={`btn btn-${mode === "light" ? "dark" : "light"} m-2`}
               onClick={handelReset}
-              // onClick={{handelReset, handelReset}}
+            // onClick={{handelReset, handelReset}}
             >
               Reset
             </button>
@@ -336,7 +338,7 @@ const Textutils = () => {
             {preview_text1}
           </pre>
           <p id="preview2">{preview_text2}</p>
-          <pre>{}</pre>
+          <pre>{ }</pre>
         </div>
       </>
     );
