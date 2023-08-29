@@ -4,16 +4,22 @@ import { EditedNote, NewNote, Note } from "@src/types";
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 // VARIABLES
-const notes: Note[] = [];
 
-const initialData = {
+
+interface InitialDataType {
+    notes: Note[];
+    editNote: (noteObject: EditedNote) => void;
+    addNote: (note: NewNote) => void;
+    deleteNote: (id: string) => void;
+    fetchNotes: () => void;
+}
+
+const notes: Note[] = [];
+const initialData: InitialDataType = {
     notes,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    editNote: (noteObject: EditedNote) => { },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    addNote: (note: NewNote) => { },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    deleteNote: (id: string) => { },
+    editNote: () => { },
+    addNote: () => { },
+    deleteNote: () => { },
     fetchNotes: () => { },
 }
 
