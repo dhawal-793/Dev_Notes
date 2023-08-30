@@ -1,15 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 
-import NoteState from "@src/context/Notes/noteState";
-import UserState from "@src/context/Users/userState";
-import Navbar from "@src/components/navigation/Navbar";
-import Footer from "@src/components/Footer";
-import Login from "@src/pages/Login";
-import SIgnup from "@src/pages/SIgnup";
-import Home from "@src/pages/Home";
-import Textutils from "@src/pages/Textutils";
-import About from "@src/pages/About";
-import ToastProvider from "@src/providers/ToastProvider";
+import NoteState from "@/context/Notes/noteState";
+import UserState from "@/context/Users/userState";
+import Navbar from "@/components/navigation/Navbar";
+import Footer from "@/components/Footer";
+import Login from "@/pages/Login";
+import SIgnup from "@/pages/SIgnup";
+import Home from "@/pages/Home";
+import Textutils from "@/pages/Textutils";
+import About from "@/pages/About";
+import ToastProvider from "@/providers/ToastProvider";
 
 import "./App.css";
 

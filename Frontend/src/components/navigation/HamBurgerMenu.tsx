@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Hamburger, Menu, Cancel } from '@src/components/Icons';
+import { Hamburger, Menu, Cancel } from '@/components/Icons';
 
 interface HamBurgerMenuProps {
     handleClick: () => void;

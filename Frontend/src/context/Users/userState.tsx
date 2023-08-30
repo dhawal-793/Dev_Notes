@@ -2,7 +2,7 @@ import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-hot-toast'
 
-import { User, NewUser } from "@srctypes";
+import { User, NewUser } from "@/types";
 
 import UserContext from "./userContext";
 

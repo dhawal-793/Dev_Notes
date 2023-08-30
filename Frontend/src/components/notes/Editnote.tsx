@@ -1,7 +1,7 @@
 import { FC, useContext, useState, useEffect, ChangeEvent, FormEvent, LegacyRef } from "react";
 
-import noteContext from "@src/context/Notes/noteContext";
-import { EditedNote } from "@src/types";
+import noteContext from "@/context/Notes/noteContext";
+import { EditedNote } from "@/types";
 
 
 interface EditNoteProps {

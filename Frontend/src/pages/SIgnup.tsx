@@ -1,8 +1,8 @@
 import { useState, useContext, ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 
-import userContext from "@src/context/Users/userContext";
-import { NewUser } from "@srctypes";
+import userContext from "@/context/Users/userContext";
+import { NewUser } from "@/types";
 
 const SIgnup = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
