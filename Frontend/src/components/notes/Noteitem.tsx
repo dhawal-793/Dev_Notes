@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 
-import noteContext from "@src/context/Notes/noteContext";
-import { Note } from "@src/types";
+import noteContext from "@/context/Notes/noteContext";
+import { Note } from "@/types";
 
 interface NoteitemProps {
   note: Note;

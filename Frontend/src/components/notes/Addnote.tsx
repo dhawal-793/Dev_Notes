@@ -1,7 +1,7 @@
 import { useState, useContext, ChangeEvent, FormEvent } from "react";
 
-import noteContext from "@src/context/Notes/noteContext";
-import { NewNote } from "@srctypes";
+import noteContext from "@/context/Notes/noteContext";
+import { NewNote } from "@/types";
 
 const Addnote = () => {
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */

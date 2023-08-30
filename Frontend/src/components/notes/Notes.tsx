@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import noteContext from "@src/context/Notes/noteContext";
-import { Note } from "@src/types";
+import noteContext from "@/context/Notes/noteContext";
+import { Note } from "@/types";
 
 import Addnote from "./Addnote";
 import Editnote from "./Editnote";
