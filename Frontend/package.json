@@ -5,12 +5,16 @@
   "author": "Dhawal Vijayvargiya",
   "homepage": "/",
   "dependencies": {
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
     "dev_notes": "file:..",
     "lucide-react": "^0.269.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "scripts": {
     "start": "vite",
