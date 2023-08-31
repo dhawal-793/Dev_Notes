@@ -6,8 +6,8 @@
   "scripts": {
     "client": "npm start --prefix Frontend",
     "server": "npm run dev --prefix Backend",
-    "dev": "concurrently \"npm run client\" \"npm run server\"",
     "init": " npm i --prefix Frontend && npm i --prefix Backend",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
     "build": "npm run build --prefix Frontend",
     "production": "npm run init && npm run build && npm run production --prefix Backend",
     "render":"npm i --prefix Backend && npm run production --prefix Backend"
