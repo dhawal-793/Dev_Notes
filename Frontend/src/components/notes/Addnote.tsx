@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
-import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -63,7 +63,7 @@ const Addnote = () => {
     <div className="container ">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onsubmit)} className="flex flex-col gap-4">
-          <div className="grid grid-cols-1 gap-2 sm:gap-5 md:gap-10 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
             <FormField
               control={form.control}
               name="title"
@@ -77,6 +77,7 @@ const Addnote = () => {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -93,6 +94,7 @@ const Addnote = () => {
                       {...field}
                     />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -108,20 +110,29 @@ const Addnote = () => {
                     disabled={loading}
                     placeholder="Description"
                     rows={10}
-                  cols={10}
+                    cols={10}
                     {...field}
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
-          <Button
-            disabled={loading}
-            type="submit"
-            className='mr-auto'
-          >
-            Add Note
-          </Button>
+          <div className="flex gap-2 mr-auto">
+            <Button
+              disabled={loading}
+              type="submit"
+            >
+              Add Note
+            </Button>
+            <Button
+              disabled={loading}
+              type="reset"
+              onClick={() => form.reset()}
+            >
+              Reset
+            </Button>
+          </div>
         </form>
       </Form>
     </div>
