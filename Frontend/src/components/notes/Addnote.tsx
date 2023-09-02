@@ -1,131 +1,142 @@
-import { useState, useContext, ChangeEvent, FormEvent } from "react";
+import { useContext, useState } from "react";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import noteContext from "@/context/Notes/noteContext";
-import { NewNote } from "@/types";
+
+
+const HOST = import.meta.env.VITE_HOST;
+
+
+const formSchema = z.object({
+  title: z.string().min(3, 'Title should be atleast 3 characters'),
+  description: z.string().min(10, 'Description should be atleast 10 characters'),
+  tag: z.string().default("general")
+})
+
+type AddNoteFormValues = z.infer<typeof formSchema>
 
 const Addnote = () => {
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-  // VARIABLES
   const context = useContext(noteContext);
-  const { addNote } = context;
-  const [note, setNote] = useState<NewNote>({
-    title: "",
-    description: "",
-    tag: "",
-  });
+  const { fetchNotes } = context;
 
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+  const [loading, setLoading] = useState(false)
 
-  // METHODS
-
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNote({ ...note, [e.target.name]: e.target.value });
-  };
-
-  const onDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setNote({ ...note, description: e.target.value });
-  };
-
-  const saveNote = (e: FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    addNote(note);
-    setNote({
+  const form = useForm<AddNoteFormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
       title: "",
       description: "",
-      tag: "",
-    });
-  };
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+      tag: "general",
+    }
+  })
 
-  // RETURN
+
+  const onsubmit = async (data: AddNoteFormValues) => {
+    try {
+      setLoading(true)
+      const options = {
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token") || "",
+        }
+      }
+      await axios.post(`${HOST}/api/notes/addnote`, data, options)
+      toast.success("Note Added Successfully")
+      fetchNotes()
+    } catch (error) {
+      toast.error("Something went wrong")
+    }
+    finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="container ">
-      <h3>Add a Note</h3>
-      <form>
-        <div
-          className="pr-5 my-3 d-inline-flex input-group input-group-sm"
-          style={{ maxWidth: "280px" }}
-        >
-          <span className="input-group-text" id="inputGroup-sizing-sm">
-            Title
-          </span>
-          <input
-            type="text"
-            className="form-control"
-            aria-label="Sizing example input"
-            name="title"
-            onChange={onInputChange}
-            value={note.title}
-            placeholder="Your Title"
-            id="noteTitle"
-            required={true}
-            aria-describedby="inputGroup-sizing-sm"
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onsubmit)} className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder='Title'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="tag"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tag</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder='Tag'
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    disabled={loading}
+                    placeholder="Description"
+                    rows={10}
+                    cols={10}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        <div className="mx-2 d-inline-flex"></div>
-        <div
-          className="my-3 d-inline-flex input-group input-group-sm"
-          style={{ maxWidth: "280px" }}
-        >
-          <span className="input-group-text" id="inputGroup-sizing-sm">
-            Tag
-          </span>
-          <input
-            type="text"
-            className="form-control"
-            aria-label="Sizing example input"
-            name="tag"
-            placeholder="general"
-            value={note.tag}
-            onChange={onInputChange}
-            id="noteTag"
-            aria-describedby="inputGroup-sizing-sm"
-          />
-        </div>
-
-        <textarea
-          className="form-control"
-          rows={10}
-          cols={10}
-          id="description"
-          name="description"
-          placeholder="Write your notes here"
-          onChange={onDescriptionChange}
-          value={note.description}
-          required={true}
-        ></textarea>
-
-        <div className="my-3 py2">
-          <button
-            type="submit"
-            className="mr-3 btn-sm btn-bg-custom"
-            onClick={saveNote}
-          >
-            Add Note
-          </button>
-          <button
-            type="reset"
-            className="mx-3 btn-sm btn-bg-custom"
-            onClick={() => {
-              setNote({ ...note, title: "", description: "", tag: "general" });
-            }}
-          >
-            Clear
-          </button>
-        </div>
-      </form>
+          <div className="flex gap-2 mr-auto">
+            <Button
+              disabled={loading}
+              type="submit"
+            >
+              Add Note
+            </Button>
+            <Button
+              disabled={loading}
+              type="reset"
+              onClick={() => form.reset()}
+            >
+              Reset
+            </Button>
+          </div>
+        </form>
+      </Form>
     </div>
   );
 };
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-// EXPORT
 
 export default Addnote;
