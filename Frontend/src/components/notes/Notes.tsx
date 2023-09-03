@@ -1,43 +1,26 @@
-import { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "@/components/ui/button";
+import NoteModal from "@/components/NoteModal";
 import noteContext from "@/context/Notes/noteContext";
 import { Note } from "@/types";
 
-import Addnote from "./Addnote";
-import Editnote from "./Editnote";
 import NoteItem from "./Noteitem";
 
 const Notes = () => {
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-  // VARIABLES
-  const context = useContext(noteContext);
   const navigate = useNavigate();
-  const ref = useRef<HTMLButtonElement | null>(null);
+  const context = useContext(noteContext);
   const { notes, fetchNotes } = context;
-  const [note, setNote] = useState({
-    id: "",
-    edittitle: "",
-    editdescription: "",
-    edittag: "",
-  });
+  const [open, setOpen] = useState(false)
+  const [modalProps, setModalProps] = useState<Note | null>(null)
 
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-  // METHODS
-
-  const updateNote = (note: Note) => {
-    setNote({
-      id: note._id,
-      edittitle: note.title,
-      editdescription: note.description,
-      edittag: note.tag,
-    });
-    ref?.current?.click();
-  };
+  const openModal = (data: Note | null) => {
+    // console.log(data);
+    setModalProps(data)
+    setOpen(true)
+  }
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -45,18 +28,14 @@ const Notes = () => {
     } else {
       navigate("/login");
     }
-    // eslint-disable-next-line
-  }, []);
-  
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-  // RETURN
+  }, [navigate, fetchNotes]);
 
   return (
     <>
-      <Addnote />
-      <Editnote note={note} reference={ref} />
+      <NoteModal isOpen={open} onClose={() => setOpen(false)} initialData={modalProps} />
+      <Button onClick={() => openModal(null)}>
+        Add a Note
+      </Button>
 
       <div className="container">
         <div className="container ">
@@ -70,7 +49,7 @@ const Notes = () => {
             {notes.map((note) => {
               return (
                 <div className="p-2 col-sm-12 col-md-6 col-lg-4" key={note?._id}>
-                  <NoteItem note={note} updateNote={updateNote} />
+                  <NoteItem note={note} updateNote={() => openModal(note)} />
                 </div>
               );
             })}
@@ -81,10 +60,5 @@ const Notes = () => {
     </>
   );
 };
-
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-// EXPORT
 
 export default Notes;
