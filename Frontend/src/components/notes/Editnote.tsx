@@ -1,48 +1,44 @@
-import { FC, useContext, useState, useEffect, ChangeEvent, FormEvent, LegacyRef } from "react";
+// import { ChangeEvent, FC, FormEvent, LegacyRef, useEffect, useState } from "react"
 
-import noteContext from "@/context/Notes/noteContext";
-import { EditedNote } from "@/types";
+import Notes from "./Notes";
+
+// import { EditedNote } from "@/types";
+// import noteContext from "@/context/Notes/noteContext";
 
 
-interface EditNoteProps {
-  note: EditedNote
-  reference: LegacyRef<HTMLButtonElement>
-}
+// interface EditNoteProps {
+// note: EditedNote
+// reference: LegacyRef<HTMLButtonElement>
+// }
 
-const Editnote: FC<EditNoteProps> = (props) => {
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+const Editnote = () => {
 
-  // VARIABLES
 
-  const context = useContext(noteContext);
-  const { editNote } = context;
-  const [note, setNote] = useState<EditedNote>({
-    id: "",
-    edittitle: "",
-    editdescription: "",
-    edittag: "",
-  });
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+  // const context = useContext(noteContext);
+  // const { editNote } = context;
 
-  // METHODS
+  // const [note, setNote] = useState<EditedNote>({
+  //   id: "",
+  //   edittitle: "",
+  //   editdescription: "",
+  //   edittag: "",
+  // });
 
-  const saveNote = (e: FormEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    editNote(note);
-  };
-  const onchange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNote({ ...note, [e.target.name]: e.target.value });
-  };
-  const onDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setNote({ ...note, [e.target.name]: e.target.value });
-  };
-  
-  useEffect(() => {
-    setNote(props.note);
-  }, [props.note]);
-  
+  // const saveNote = (e: FormEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   // editNote(note);
+  // };
+  // const onchange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setNote({ ...note, [e.target.name]: e.target.value });
+  // };
+  // const onDescriptionChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  //   setNote({ ...note, [e.target.name]: e.target.value });
+  // };
+
+  // useEffect(() => {
+  //   setNote(props.note);
+  // }, [props.note]);
+
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -50,7 +46,9 @@ const Editnote: FC<EditNoteProps> = (props) => {
 
   return (
     <>
-      <div className="py-3"></div>
+      <Notes />
+
+      {/* <div className="py-3"></div>
       <button
         type="button"
         ref={props.reference}
@@ -150,14 +148,10 @@ const Editnote: FC<EditNoteProps> = (props) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
 
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-// EXPORT
-
-export default Editnote;
+export default Editnote
