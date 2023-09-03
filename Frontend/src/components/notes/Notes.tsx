@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
-import NoteModal from "@/components/NoteModal";
+import NoteModal from "@/components/modals/note-modal";
 import noteContext from "@/context/Notes/noteContext";
 import { Note } from "@/types";
 
