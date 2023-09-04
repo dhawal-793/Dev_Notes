@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
+import { ThemeToggle } from '@/components/ThemeToggle';
+
 import AuthLinks from './AuthLinks';
 
 const navLinks = [
@@ -30,7 +32,7 @@ interface NavigationProps {
 const Navigation: FC<NavigationProps> = ({ ulClass, liClass, handleClick }) => {
 
     const location = useLocation();
-    
+
     return (
         <ul className={ulClass}>
             <ul className='flex flex-col items-center justify-start flex-1 gap-2 md:gap-5 md:flex-row'>
@@ -47,7 +49,12 @@ const Navigation: FC<NavigationProps> = ({ ulClass, liClass, handleClick }) => {
                     )
                 })}
             </ul>
-            <AuthLinks />
+            <div className="flex items-center md:gap-1">
+                <div className="hidden md:block">
+                    <ThemeToggle />
+                </div>
+                <AuthLinks />
+            </div>
         </ul>
     )
 }

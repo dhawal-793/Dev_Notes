@@ -3,7 +3,8 @@ import { FC } from "react"
 import NoteState from "@/context/Notes/noteState"
 import UserState from "@/context/Users/userState"
 
-import ToastProvider from "./ToastProvider"
+import ToastProvider from "./toast-provider"
+import ThemeProvider from "./theme-provider"
 
 interface Providersprops {
     children: React.ReactNode
@@ -11,12 +12,14 @@ interface Providersprops {
 
 const Providers: FC<Providersprops> = ({ children }) => {
     return (
-        <UserState>
-            <NoteState>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <UserState>
+                <NoteState>
                     <ToastProvider />
                     {children}
-            </NoteState >
-        </UserState>
+                </NoteState >
+            </UserState>
+        </ThemeProvider>
     )
 }
 
