@@ -12,8 +12,7 @@ interface NoteStateProps {
 const NoteState: FC<NoteStateProps> = ({ children }) => {
 
   const host = import.meta.env.VITE_HOST;
-  const initialNotes: Note[] = [];
-  const [notes, setNotes] = useState<Note[]>(initialNotes);
+  const [notes, setNotes] = useState<Note[] | null>(null);
 
   const headers: HeadersInit = {
     "Content-Type": "application/json",
