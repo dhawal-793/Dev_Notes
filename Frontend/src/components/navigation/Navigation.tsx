@@ -49,7 +49,7 @@ const Navigation: FC<NavigationProps> = ({ ulClass, liClass, handleClick }) => {
                     )
                 })}
             </ul>
-            <div className="flex items-center md:gap-5">
+            <div className="flex items-center md:gap-1">
                 <div className="hidden md:block">
                     <ThemeToggle />
                 </div>

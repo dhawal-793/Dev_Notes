@@ -23,11 +23,11 @@ const Navbar = () => {
             </p>
           </div>
           <Navigation ulClass="hidden md:flex flex-1 justify-between" liClass="" />
-          <div className="flex items-center gap-4 md:hidden">
+          <div className="flex items-center gap-1 md:hidden">
             <ThemeToggle />
             <HamBurgerMenu handleClick={handleClick} navOpen={navOpen} />
           </div>
-          <Navigation handleClick={handleClick} ulClass={` duration-500 ${navOpen ? "translate-x-0" : "translate-x-80 "} border-l border-input flex flex-col h-screen bg-background w-60 top-0 right-0 absolute items-center justify-between gap-10 pb-8 pt-24`} liClass=" my-4 py-1 px-0 border-b-2 border-b-gray-500" />
+          <Navigation handleClick={handleClick} ulClass={` duration-500 ${navOpen ? "translate-x-0" : "translate-x-80 "} border-l border-input flex flex-col h-screen bg-background w-60 top-0 right-0 absolute items-center justify-between gap-10 pb-8 pt-24`} liClass="my-4 py-1 px-0 border-b-2 border-b-gray-500" />
         </div>
       </div>
       <div className="h-16" />
