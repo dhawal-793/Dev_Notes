@@ -40,19 +40,28 @@ const Notes = () => {
       <div className="container">
         <div className="container ">
           <h3>Find Your Notes here...</h3>
-          {notes.length < 1 && (
-            <div className="container">
-              <h5 className="text-center">No Notes Available to see</h5>
-            </div>
-          )}
-          <div className="row">
-            {notes.map((note) => {
-              return (
-                <div className="p-2 col-sm-12 col-md-6 col-lg-4" key={note?._id}>
-                  <NoteItem note={note} updateNote={() => openModal(note)} />
+          <div className="my-y">
+            {notes === null ? (
+              <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <h5 className="text-lg font-medium text-center">Loading...</h5>
+              </div>
+            ) :
+              notes.length < 1 && (
+                <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                  <h4 className="mb-3 text-3xl font-bold">Sorry no note available for now.</h4>
+                  <h5 className="text-lg font-medium text-center">Create a note to see here.</h5>
                 </div>
-              );
-            })}
+              )
+            }
+            <div className="row">
+              {notes && notes.map((note) => {
+                return (
+                  <div className="p-2 col-sm-12 col-md-6 col-lg-4" key={note?._id}>
+                    <NoteItem note={note} updateNote={() => openModal(note)} />
+                  </div>
+                );
+              })}
+            </div>
           </div>
           <div className="container pb-5 mb-5"></div>
         </div>
