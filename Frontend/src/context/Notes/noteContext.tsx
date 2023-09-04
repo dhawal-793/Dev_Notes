@@ -4,7 +4,7 @@ import { Note } from "@/types";
 
 
 interface InitialDataType {
-    notes: Note[];
+    notes: Note[] | null;
     deleteNote: (id: string) => void;
     fetchNotes: () => void;
 }
