@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { Hamburger, Menu, Cancel } from '@/components/Icons';
+import { Button } from '@/components/ui/button';
 
 interface HamBurgerMenuProps {
     handleClick: () => void;
@@ -9,10 +10,7 @@ interface HamBurgerMenuProps {
 
 const HamBurgerMenu: FC<HamBurgerMenuProps> = ({ handleClick, navOpen }) => {
     return (
-        <div
-            className='z-50 text-gray-500 transition-all duration-300 ease-in-out cursor-pointer group md:hidden hover:scale-110 hover:text-gray-300'
-            onClick={handleClick}
-        >
+        <Button variant="ghost" size="icon" onClick={handleClick} className='z-50 group md:hidden'>
             {navOpen &&
                 <div className='group'>
                     <span className="group-hover:hidden ">
@@ -33,7 +31,7 @@ const HamBurgerMenu: FC<HamBurgerMenuProps> = ({ handleClick, navOpen }) => {
                     </span>
                 </div>
             }
-        </div>
+        </Button>
     )
 }
 
