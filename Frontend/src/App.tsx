@@ -15,8 +15,8 @@ const App = () => {
   return (
     <Providers>
       <Navbar />
-      <div className="w-full ">
-        <div className="max-w-screen-xl pt-20 mx-auto">
+      <div className="flex flex-col w-full min-h-screen">
+        <div className="flex-1 max-w-screen-xl pt-[70px] mx-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -25,8 +25,8 @@ const App = () => {
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </Providers>
   );
 };
