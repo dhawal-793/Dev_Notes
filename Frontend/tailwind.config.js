@@ -11,11 +11,12 @@ export default {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
     },
     extend: {
+      screens: {
+        "2xl": "1456px",
+        "3xl": "1684px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
