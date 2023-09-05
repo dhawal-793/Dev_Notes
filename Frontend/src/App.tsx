@@ -16,7 +16,7 @@ const App = () => {
     <Providers>
       <Navbar />
       <div className="flex flex-col w-full min-h-screen">
-        <div className="flex-1 max-w-screen-xl pt-[70px] mx-auto">
+        <div className="flex-1 max-w-screen-2xl pt-[70px] mx-auto w-full">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
