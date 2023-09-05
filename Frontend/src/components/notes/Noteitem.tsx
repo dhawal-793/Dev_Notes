@@ -1,8 +1,11 @@
 import { FC, useState, useContext } from "react";
+import { Edit, Trash } from "lucide-react";
 
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import AlertModal from "@/components/modals/alert-modal";
 import noteContext from "@/context/Notes/noteContext";
 import { Note } from "@/types";
-import AlertModal from "../modals/alert-modal";
 
 interface NoteitemProps {
   note: Note;
@@ -17,54 +20,34 @@ const Noteitem: FC<NoteitemProps> = ({ note, updateNote }) => {
   return (
     <>
       <AlertModal isOpen={open} onClose={() => setOpen(false)} onConfirm={() => deleteNote(note._id)} />
-      <div className="container ">
-        <div className="py-3 mb-5 rounded card custom-shadow bg-body">
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              justifyContent: "flex-end",
-              left: "21px",
-            }}
-          >
-            <span className="badge bg-danger">
-              <i className="fa-solid fa-tag cursorPointer"></i> {note.tag}
-            </span>
+
+      <Card className="w-full">
+        <CardHeader className="px-2 pt-2">
+          <div className="flex items-center justify-between w-h-full">
+            <div>
+              <Badge>
+                {note.tag}
+              </Badge>
+            </div>
+            <div className="flex items-center gap-1">
+              <button onClick={() => updateNote(note)} className="cursor-pointer w-8 h-8 relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                <Edit size={20} />
+              </button>
+              <button onClick={() => setOpen(true)} className="cursor-pointer w-8 h-8 relative flex select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50">
+                <Trash size={20} />
+              </button>
+
+            </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              justifyContent: "flex-end",
-              right: "40px",
-            }}
-          >
-            <i
-              className="mx-2 fa-regular fa-pen-to-square cursorPointer"
-              onClick={() => {
-                updateNote(note);
-              }}
-            ></i>
+        </CardHeader>
+        <CardContent>
+          <CardTitle className="font-bold">{note.title}</CardTitle>
+          <div className="mt-5 text-base break-words">
+            {note.description}
           </div>
-          <div
-            style={{
-              display: "flex",
-              position: "absolute",
-              justifyContent: "flex-end",
-              right: "10px",
-            }}
-          >
-            <i
-              className="mx-2 fa-regular fa-trash-can cursorPointer"
-              onClick={() => setOpen(true)}
-            ></i>
-          </div>
-          <div className="my-2 card-body">
-            <h4 className="my-2 card-title">{note.title}</h4>
-            <p className="card-text">{note.description}</p>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
+
     </>
   );
 };
