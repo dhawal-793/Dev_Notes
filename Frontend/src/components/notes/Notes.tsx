@@ -2,7 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import NoteModal from "@/components/modals/note-modal";
+import Heading from "@/components/ui/Heading";
 import noteContext from "@/context/Notes/noteContext";
 import { Note } from "@/types";
 
@@ -33,38 +35,40 @@ const Notes = () => {
   return (
     <>
       <NoteModal isOpen={open} onClose={() => setOpen(false)} initialData={modalProps} />
-      <Button onClick={() => openModal(null)}>
-        Add a Note
-      </Button>
 
       <div className="container">
-        <div className="container ">
-          <h3>Find Your Notes here...</h3>
-          <div className="my-y">
-            {notes === null ? (
-              <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                <h5 className="text-lg font-medium text-center">Loading...</h5>
-              </div>
-            ) :
-              notes.length < 1 && (
-                <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                  <h4 className="mb-3 text-3xl font-bold">Sorry no note available for now.</h4>
-                  <h5 className="text-lg font-medium text-center">Create a note to see here.</h5>
-                </div>
-              )
-            }
-            <div className="row">
-              {notes && notes.map((note) => {
-                return (
-                  <div className="p-2 col-sm-12 col-md-6 col-lg-4" key={note?._id}>
-                    <NoteItem note={note} updateNote={() => openModal(note)} />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-          <div className="container pb-5 mb-5"></div>
+        <div className="flex items-center justify-between mt-10 mb-4 ">
+          <Heading title="DevNotes" description="Your notes..." />
+          <Button onClick={() => openModal(null)}>
+            Add a Note
+          </Button>
         </div>
+        <Separator />
+
+        <div className="my-10">
+          {notes === null ? (
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <h5 className="text-lg font-medium text-center">Loading...</h5>
+            </div>
+          ) :
+            notes.length < 1 && (
+              <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <h4 className="mb-3 text-3xl font-bold">Sorry no note available for now.</h4>
+                <h5 className="text-lg font-medium text-center">Create a note to see here.</h5>
+              </div>
+            )
+          }
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3 grid-rows-masonary">
+            {notes && notes.map((note) => {
+              return (
+                <div key={note?._id}>
+                  <NoteItem note={note} updateNote={() => openModal(note)} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
       </div>
     </>
   );
