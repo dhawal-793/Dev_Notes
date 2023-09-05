@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -37,10 +38,13 @@ const Notes = () => {
       <NoteModal isOpen={open} onClose={() => setOpen(false)} initialData={modalProps} />
 
       <div className="container">
-        <div className="flex items-center justify-between mt-10 mb-4 ">
+        <div className="flex justify-between mt-10 mb-4 item-center">
           <Heading title="DevNotes" description="Your notes..." />
-          <Button onClick={() => openModal(null)}>
+          <Button onClick={() => openModal(null)} size="sm" className="hidden sm:block">
             Add a Note
+          </Button>
+          <Button onClick={() => openModal(null)} size="icon" className="rounded-full sm:hidden">
+            <Plus />
           </Button>
         </div>
         <Separator />
