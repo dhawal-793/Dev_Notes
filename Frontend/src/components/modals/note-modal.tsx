@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react"
 
 import NotesForm from "@/components/notes/NotesForm"
 import Modal from "@/components/ui/modal"
+import { Separator } from "@/components/ui/separator";
 import { Note } from "@/types"
 
 interface NoteModalProps {
@@ -29,6 +30,8 @@ const NoteModal: FC<NoteModalProps> = ({ initialData, isOpen, onClose }) => {
             isOpen={isOpen}
             onClose={onClose}
         >
+            <Separator className="mb-3" />
+
             <NotesForm initialData={initialData} handleSubmit={onClose} />
         </Modal>
     )
