@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import NoteModal from "@/components/modals/note-modal";
 import Heading from "@/components/ui/Heading";
+import ToolTipBox from "@/components/ui/tool-tip-box";
 import noteContext from "@/context/Notes/noteContext";
 import { Note } from "@/types";
 
@@ -38,14 +39,17 @@ const Notes = () => {
       <NoteModal isOpen={open} onClose={() => setOpen(false)} initialData={modalProps} />
 
       <div className="container">
-        <div className="flex justify-between mt-10 mb-4 item-center">
-          <Heading title="DevNotes" description="Your notes..." />
+        <div className="flex items-center justify-between mt-10 mb-4">
+          <Heading title="DevNotes" description="Your notes on the cloud" />
           <Button onClick={() => openModal(null)} size="sm" className="hidden sm:block">
             Add a Note
           </Button>
-          <Button onClick={() => openModal(null)} size="icon" className="rounded-full sm:hidden">
-            <Plus />
-          </Button>
+          <ToolTipBox tip="Create a note">
+            <Button onClick={() => openModal(null)} size="icon" className="rounded-full sm:hidden">
+              <Plus />
+            </Button>
+          </ToolTipBox>
+
         </div>
         <Separator />
 
@@ -73,7 +77,6 @@ const Notes = () => {
             })}
           </div>
         </div>
-
       </div>
     </>
   );
