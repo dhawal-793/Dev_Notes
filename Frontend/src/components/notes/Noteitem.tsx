@@ -41,7 +41,7 @@ const Noteitem: FC<NoteitemProps> = ({ note, updateNote }) => {
           </div>
         </CardHeader>
         <CardContent>
-          <CardTitle className="font-bold">{note.title}</CardTitle>
+          <CardTitle className="font-bold break-words">{note.title}</CardTitle>
           <div className="mt-5 text-base break-words">
             {note.description}
           </div>
