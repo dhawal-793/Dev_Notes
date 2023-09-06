@@ -1,5 +1,6 @@
 import { FC } from "react"
 
+import { TooltipProvider } from "@/components/ui/tooltip"
 import NoteState from "@/context/Notes/noteState"
 import UserState from "@/context/Users/userState"
 
@@ -15,8 +16,10 @@ const Providers: FC<Providersprops> = ({ children }) => {
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
             <UserState>
                 <NoteState>
-                    <ToastProvider />
-                    {children}
+                    <TooltipProvider>
+                        <ToastProvider />
+                        {children}
+                    </TooltipProvider>
                 </NoteState >
             </UserState>
         </ThemeProvider>
