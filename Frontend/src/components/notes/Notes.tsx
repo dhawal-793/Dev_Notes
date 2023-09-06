@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import NoteModal from "@/components/modals/note-modal";
-import Heading from "@/components/ui/Heading";
+import Heading from "@/components/ui/heading";
 import ToolTipBox from "@/components/ui/tool-tip-box";
 import noteContext from "@/context/Notes/noteContext";
 import { Note } from "@/types";
