@@ -25,11 +25,10 @@ const navLinks = [
 
 interface NavigationProps {
     ulClass: string;
-    liClass: string;
     handleClick?: () => void;
 }
 
-const Navigation: FC<NavigationProps> = ({ ulClass, liClass, handleClick }) => {
+const Navigation: FC<NavigationProps> = ({ ulClass, handleClick }) => {
 
     const location = useLocation();
 
@@ -40,8 +39,8 @@ const Navigation: FC<NavigationProps> = ({ ulClass, liClass, handleClick }) => {
                     const isActive = location.pathname === link;
                     return (
                         <li key={id}
-                            className={`md:px-2 capitalize font-medium text-lg cursor-pointer ${isActive ? "text-gray-300" : "text-gray-500"} duration-500 hover:text-gray-300 ${liClass}`}>
-                            <Link className='hover:text-gray-300'
+                            className={`md:px-2 capitalize font-medium text-lg cursor-pointer border-b-2 md:border-b-0 hover:border-b-accent-foreground/80 ${isActive ? "text-accent-foreground border-b-accent-foreground/75" : "text-accent"} duration-500 hover:text-accent-foreground/70 my-4 py-1 md:my-0 md:py-0`}>
+                            <Link
                                 onClick={handleClick}
                                 to={link}> {name}
                             </Link>

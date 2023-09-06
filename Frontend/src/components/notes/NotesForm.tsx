@@ -16,9 +16,9 @@ const HOST = import.meta.env.VITE_HOST;
 
 
 const formSchema = z.object({
-    title: z.string().min(3, 'Title should be atleast 3 characters'),
-    description: z.string().min(10, 'Description should be atleast 10 characters'),
-    tag: z.string().min(3, "Tag should be atleast 3 characters")
+    title: z.string().min(3, 'Title should be atleast 3 characters').max(35, 'Title can only have a maximum of 35 characters'),
+    description: z.string().min(10, 'Description should be atleast 10 characters').max(120, 'Description can only have a maximum of 120 characters'),
+    tag: z.string().min(3, "Tag should be atleast 3 characters").max(8, 'Tag can only have a maximum of 8 characters')
 })
 
 type NoteFormValues = z.infer<typeof formSchema>
