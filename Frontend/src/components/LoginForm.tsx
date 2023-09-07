@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Heading from '@/components/ui/heading';
 import { Separator } from '@/components/ui/separator';
+import { Eye, EyeOff } from 'lucide-react';
 
 const HOST = import.meta.env.VITE_HOST;
 
@@ -24,7 +25,7 @@ type LoginFormValues = z.infer<typeof formSchema>
 const LoginForm = () => {
 
     const navigate = useNavigate()
-
+    const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const form = useForm<LoginFormValues>({
@@ -34,7 +35,6 @@ const LoginForm = () => {
             password: ""
         }
     })
-
 
     const onSubmit = async (data: LoginFormValues) => {
         try {
@@ -59,13 +59,13 @@ const LoginForm = () => {
     }
 
     return (
-        <div className='container max-w-4xl py-10 mx-auto'>
+        <div className='container max-w-4xl py-4 mx-auto md:py-10'>
             <Heading title="Login" description='Login to DevNotes' />
             <Separator className='mt-4 mb-8' />
             <div className='max-w-lg mx-auto'>
                 <Form {...form}>
                     <form onSubmit={form.control.handleSubmit(onSubmit)} className='flex flex-col gap-4'>
-                        <div className='flex flex-col gap-4'>
+                        <div className='flex flex-col gap-2 md:gap-4'>
                             <FormField
                                 control={form.control}
                                 name='email'
@@ -76,7 +76,7 @@ const LoginForm = () => {
                                             <Input
                                                 type="email"
                                                 disabled={loading}
-                                                placeholder='Your Email'
+                                                placeholder='Email'
                                                 {...field}
                                             />
                                         </FormControl>
@@ -90,13 +90,20 @@ const LoginForm = () => {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Password</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                type='password'
-                                                disabled={loading}
-                                                placeholder='Your Password'
-                                                {...field}
-                                            />
+                                        <FormControl >
+                                            <div className='relative'>
+                                                <Input
+                                                    type={showPassword ? 'text' : 'password'}
+                                                    disabled={loading}
+                                                    placeholder='Password'
+                                                    {...field}
+                                                    className='pr-10'
+                                                />
+                                                <button type="button" className='absolute inset-y-0 grid place-items-center right-5' onClick={() => setShowPassword(prev => !prev)}>
+                                                    <EyeOff className={`text-sm text-white absolute transition-all duration-200 ${showPassword ? "scale-100" : "scale-0"}`} />
+                                                    <Eye className={`text-sm text-white absolute transition-all duration-200 ${!showPassword ? "scale-100" : "scale-0"}`} />
+                                                </button>
+                                            </div>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
