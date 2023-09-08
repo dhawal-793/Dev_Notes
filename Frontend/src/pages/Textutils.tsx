@@ -1,5 +1,6 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { CaseLower, CaseSensitive, CaseUpper, Copy, ListMinus, RotateCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,6 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import Heading from "@/components/ui/heading";
 import ToolTipBox from "@/components/ui/tool-tip-box";
-import { toast } from "react-hot-toast";
 
 const Textutils = () => {
 
@@ -62,54 +62,52 @@ const Textutils = () => {
 
   if (!localStorage.getItem("token")) {
     navigate("/login");
-  } else {
-    return (
-      <div className="container py-10">
-
-        <Heading title="TextUtils" description="You Personal Text debugger" />
-        <Separator className="mt-2 mb-4" />
-        <Textarea
-          value={text}
-          rows={10}
-          cols={14}
-          placeholder="Your text here..."
-          onChange={handleTextChange}
-        />
-        <div className="flex flex-wrap items-center justify-center gap-4 mt-12">
-          <ToolTipBox tip="Convert to Uppercase">
-            <Button onClick={handelUperCase} size="icon">
-              <CaseUpper />
-            </Button>
-          </ToolTipBox>
-          <ToolTipBox tip="Convert to Lowercase">
-            <Button onClick={handelLowerCase} size="icon">
-              <CaseLower />
-            </Button>
-          </ToolTipBox>
-          <ToolTipBox tip="Capatilize">
-            <Button onClick={handelCaptalize} size="icon">
-              <CaseSensitive />
-            </Button>
-          </ToolTipBox>
-          <ToolTipBox tip="Copy Text">
-            <Button onClick={handelCopy} size="icon">
-              <Copy />
-            </Button>
-          </ToolTipBox>
-          <ToolTipBox tip="Reset">
-            <Button onClick={handelReset} size="icon">
-              <RotateCcw />
-            </Button>
-          </ToolTipBox>
-          <ToolTipBox tip="Remove Extra Spaces">
-            <Button onClick={handleExtraSpaces} size="icon">
-              <ListMinus />
-            </Button>
-          </ToolTipBox>
-        </div>
-      </div>
-    );
   }
+  return (
+    <div className="container py-10">
+      <Heading title="TextUtils" description="You Personal Text debugger" />
+      <Separator className="mt-2 mb-4" />
+      <Textarea
+        value={text}
+        rows={10}
+        cols={14}
+        placeholder="Your text here..."
+        onChange={handleTextChange}
+      />
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-12">
+        <ToolTipBox tip="Convert to Uppercase">
+          <Button onClick={handelUperCase} size="icon">
+            <CaseUpper />
+          </Button>
+        </ToolTipBox>
+        <ToolTipBox tip="Convert to Lowercase">
+          <Button onClick={handelLowerCase} size="icon">
+            <CaseLower />
+          </Button>
+        </ToolTipBox>
+        <ToolTipBox tip="Capatilize">
+          <Button onClick={handelCaptalize} size="icon">
+            <CaseSensitive />
+          </Button>
+        </ToolTipBox>
+        <ToolTipBox tip="Copy Text">
+          <Button onClick={handelCopy} size="icon">
+            <Copy />
+          </Button>
+        </ToolTipBox>
+        <ToolTipBox tip="Reset">
+          <Button onClick={handelReset} size="icon">
+            <RotateCcw />
+          </Button>
+        </ToolTipBox>
+        <ToolTipBox tip="Remove Extra Spaces">
+          <Button onClick={handleExtraSpaces} size="icon">
+            <ListMinus />
+          </Button>
+        </ToolTipBox>
+      </div>
+    </div>
+  );
 };
 
 
