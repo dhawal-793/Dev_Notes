@@ -133,8 +133,8 @@ const SignUpForm = () => {
                                                     className='pr-10'
                                                 />
                                                 <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5' onClick={() => toggleview("pass")}>
-                                                    <EyeOff size={20} className={`${loading ? "text-input" : "text-white"} absolute transition-all duration-200 ${showPassword ? "scale-100" : "scale-0"}`} />
-                                                    <Eye size={20} className={`${loading ? "text-input" : "text-white"} absolute transition-all duration-200 ${!showPassword ? "scale-100" : "scale-0"}`} />
+                                                    <EyeOff size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${showPassword ? "scale-100" : "scale-0"}`} />
+                                                    <Eye size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${!showPassword ? "scale-100" : "scale-0"}`} />
                                                 </button>
                                             </div>
                                         </FormControl>
@@ -158,8 +158,8 @@ const SignUpForm = () => {
                                                     className='pr-10'
                                                 />
                                                 <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5' onClick={() => toggleview("cpass")}>
-                                                    <EyeOff size={20} className={`${loading ? "text-input" : "text-white"} absolute transition-all duration-200 ${showConfirmPassword ? "scale-100" : "scale-0"}`} />
-                                                    <Eye size={20} className={`${loading ? "text-input" : "text-white"} absolute transition-all duration-200 ${!showConfirmPassword ? "scale-100" : "scale-0"}`} />
+                                                    <EyeOff size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${showConfirmPassword ? "scale-100" : "scale-0"}`} />
+                                                    <Eye size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${!showConfirmPassword ? "scale-100" : "scale-0"}`} />
                                                 </button>
                                             </div>
                                         </FormControl>
