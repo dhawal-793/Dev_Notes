@@ -4,13 +4,14 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Eye, EyeOff } from 'lucide-react';
 import axios from 'axios';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import Heading from '@/components/ui/heading';
+import { Separator } from '@/components/ui/separator';
 
 const HOST = import.meta.env.VITE_HOST;
 
@@ -31,6 +32,8 @@ type SignUpFormValues = z.infer<typeof formSchema>
 const SignUpForm = () => {
 
     const navigate = useNavigate()
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const form = useForm<SignUpFormValues>({
@@ -42,6 +45,11 @@ const SignUpForm = () => {
             cpassword: ""
         }
     })
+
+    const toggleview = (type: string) => {
+        type === "pass" ? setShowPassword(prev => !prev) : setShowConfirmPassword(prev => !prev)
+
+    }
 
     const onSubmit = async (data: SignUpFormValues) => {
         try {
@@ -116,13 +124,19 @@ const SignUpForm = () => {
                                     <FormItem>
                                         <FormLabel>Password</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                type='password'
-                                                disabled={loading}
-                                                placeholder='Password'
-                                                {...field}
-                                                className='pr-10'
-                                            />
+                                            <div className='relative'>
+                                                <Input
+                                                    type={showPassword ? 'text' : 'password'}
+                                                    disabled={loading}
+                                                    placeholder='Password'
+                                                    {...field}
+                                                    className='pr-10'
+                                                />
+                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5' onClick={() => toggleview("pass")}>
+                                                    <EyeOff className={`text-sm text-white absolute transition-all duration-200 ${showPassword ? "scale-100" : "scale-0"}`} />
+                                                    <Eye className={`text-sm text-white absolute transition-all duration-200 ${!showPassword ? "scale-100" : "scale-0"}`} />
+                                                </button>
+                                            </div>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -135,13 +149,19 @@ const SignUpForm = () => {
                                     <FormItem>
                                         <FormLabel>Confirm Password</FormLabel>
                                         <FormControl>
-                                            <Input
-                                                type='password'
-                                                disabled={loading}
-                                                placeholder='Confirm Password'
-                                                {...field}
-                                                className='pr-10'
-                                            />
+                                            <div className='relative'>
+                                                <Input
+                                                    type={showConfirmPassword ? 'text' : 'password'}
+                                                    disabled={loading}
+                                                    placeholder='Confirm Password'
+                                                    {...field}
+                                                    className='pr-10'
+                                                />
+                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5' onClick={() => toggleview("cpass")}>
+                                                    <EyeOff className={`text-sm text-white absolute transition-all duration-200 ${showConfirmPassword ? "scale-100" : "scale-0"}`} />
+                                                    <Eye className={`text-sm text-white absolute transition-all duration-200 ${!showConfirmPassword ? "scale-100" : "scale-0"}`} />
+                                                </button>
+                                            </div>
                                         </FormControl>
                                         <FormMessage />
                                     </FormItem>
@@ -154,7 +174,7 @@ const SignUpForm = () => {
                                     disabled={loading}
                                     type="submit"
                                 >
-                                    Sign Up
+                                    SignUp
                                 </Button>
                                 <Button
                                     disabled={loading}
