@@ -1,7 +1,7 @@
 const connectToMongo = require("./db");
 const express = require("express");
 const cors = require("cors");
-const path = require("path")
+// const path = require("path")
 require("dotenv").config();
 connectToMongo();
 
@@ -27,10 +27,11 @@ if (
 ) {
 
   // app.use(express.static("../Frontend/build"));
-  const buildPath = (path.join(__dirname, "../Frontend/build"));
-  app.use(express.static(buildPath));
+  // const buildPath = (path.join(__dirname, "../Frontend/build"));
+  // app.use(express.static(buildPath));
   app.get('(/*)?', (req, res) => {
-    res.sendFile(path.join(buildPath, "index.html"));
+    // res.sendFile(path.join(buildPath, "index.html"));
+    res.redirect(process.env.FRONTEND)
   });
 }
 
