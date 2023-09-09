@@ -29,11 +29,16 @@ if (
   // app.use(express.static("../Frontend/build"));
   // const buildPath = (path.join(__dirname, "../Frontend/build"));
   // app.use(express.static(buildPath));
-  app.get('(/*)?', (req, res) => {
-    // res.sendFile(path.join(buildPath, "index.html"));
+  // app.get('(/*)?', (req, res) => {
+  //   res.sendFile(path.join(buildPath, "index.html"));
+  // });
+
+  app.get('/', (req, res) => {
     res.redirect(process.env.FRONTEND)
   });
 }
+
+
 
 app.listen(port, () => {
   console.log(`DevNotes Backend listening at port ${port}`);
