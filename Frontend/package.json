@@ -20,7 +20,7 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.45.4",
+    "react-hook-form": "^7.46.1",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.3.0",
     "tailwind-merge": "^1.14.0",
@@ -32,7 +32,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "serve": "vite preview",
-    "production": "pnpm i && pnpm run build"
+    "production": "pnpm i --no-frozen-lockfile && pnpm run build"
   },
   "eslintConfig": {
     "extends": [
