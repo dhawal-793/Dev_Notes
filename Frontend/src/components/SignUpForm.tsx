@@ -132,7 +132,7 @@ const SignUpForm = () => {
                                                     {...field}
                                                     className='pr-10'
                                                 />
-                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5' onClick={() => toggleview("pass")}>
+                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5 opacity-80 focus:opacity-100' onClick={() => toggleview("pass")}>
                                                     <EyeOff size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${showPassword ? "scale-100" : "scale-0"}`} />
                                                     <Eye size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${!showPassword ? "scale-100" : "scale-0"}`} />
                                                 </button>
@@ -157,7 +157,7 @@ const SignUpForm = () => {
                                                     {...field}
                                                     className='pr-10'
                                                 />
-                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5' onClick={() => toggleview("cpass")}>
+                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5 opacity-80 focus:opacity-100' onClick={() => toggleview("cpass")}>
                                                     <EyeOff size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${showConfirmPassword ? "scale-100" : "scale-0"}`} />
                                                     <Eye size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${!showConfirmPassword ? "scale-100" : "scale-0"}`} />
                                                 </button>
@@ -187,7 +187,7 @@ const SignUpForm = () => {
                             <div className='sm:pr-3'>
                                 <p className='flex items-center text-base sm:text-lg text-accent-foreground/50 text- '>
                                     <span>Have an Accout ?</span>
-                                    <Link to="/login" className=' pb-[2px] ml-2 text-sm sm:text-base border-b border-b-current text-accent-foreground/90 hover:text-accent-foreground'>Log in now!</Link>
+                                    <Link to={loading ? "/signup" : "/login"} className={`'pb-[2px] ml-2 text-sm sm:text-base border-b border-b-current ${loading ? "text-input" : "text-accent-foreground/90 hover:text-accent-foreground"}`}>Log in now!</Link>
                                 </p>
                             </div>
                         </div>
