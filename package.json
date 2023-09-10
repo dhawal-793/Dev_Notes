@@ -6,17 +6,12 @@
     "init:server": "cd Backend && pnpm i",
     "init:client": "cd Frontend && pnpm i",
     "init:both": "concurrently \"pnpm init:server\" \"pnpm init:client\"",
-
     "start:server": "cd Backend && pnpm dev",
     "start:client": "cd Frontend && pnpm start",
-    "start:both": "concurrently \"pnpm start:server\" \"pnpm start:client\"",
+    "start:both": "concurrently \"pnpm start:server\" \"pnpm start:client\"",  
     "preview:client": "cd Frontend && pnpm build && pnpm serve --port 3001",
     "preview:server": "cd Backend && pnpm serve",
     "preview:both": "pnpm init:both && concurrently \"pnpm preview:server\" \"pnpm preview:client\"",
-    "build:client": "cd Frontend && pnpm i && pnpm build",
-    "build:server": "cd Backend && pnpm i",
-    "build:production": "pnpm build:client && cd ./  && pnpm build:server",
-    "serve:production":"pnpm serve"
   },
   "keywords": [],
   "author": "Dhawal Vijayvargiya",
