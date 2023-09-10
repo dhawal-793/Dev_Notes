@@ -11,7 +11,7 @@
     "start:both": "concurrently \"pnpm start:server\" \"pnpm start:client\"",  
     "preview:client": "cd Frontend && pnpm build && pnpm serve --port 3001",
     "preview:server": "cd Backend && pnpm serve",
-    "preview:both": "pnpm init:both && concurrently \"pnpm preview:server\" \"pnpm preview:client\"",
+    "preview:both": "pnpm init:both && concurrently \"pnpm preview:server\" \"pnpm preview:client\""
   },
   "keywords": [],
   "author": "Dhawal Vijayvargiya",
