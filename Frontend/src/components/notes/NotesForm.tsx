@@ -9,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import noteContext from "@/context/Notes/noteContext";
+import { NoteContext } from "@/providers/note-provider";
 import { Note } from "@/types";
 
 const HOST = import.meta.env.VITE_HOST;
@@ -29,7 +29,7 @@ interface NotesFormProps {
 }
 
 const NotesForm: FC<NotesFormProps> = ({ initialData, handleSubmit }) => {
-    const context = useContext(noteContext);
+    const context = useContext(NoteContext);
     const { fetchNotes } = context;
     const [loading, setLoading] = useState(false)
 

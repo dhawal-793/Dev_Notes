@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import NoteModal from "@/components/modals/note-modal";
 import Heading from "@/components/ui/heading";
 import ToolTipBox from "@/components/ui/tool-tip-box";
-import noteContext from "@/context/Notes/noteContext";
+import { NoteContext } from "@/providers/note-provider";
 import { Note } from "@/types";
 
 import NoteItem from "./Noteitem";
@@ -15,7 +15,7 @@ import NoteItem from "./Noteitem";
 const Notes = () => {
 
   const navigate = useNavigate();
-  const context = useContext(noteContext);
+  const context = useContext(NoteContext);
   const { notes, fetchNotes } = context;
   const [open, setOpen] = useState(false)
   const [modalProps, setModalProps] = useState<Note | null>(null)
@@ -32,7 +32,7 @@ const Notes = () => {
     } else {
       navigate("/login");
     }
-  }, [navigate, fetchNotes]);
+  }, []);
 
   return (
     <>
