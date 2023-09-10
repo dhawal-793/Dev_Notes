@@ -5,13 +5,15 @@
   "scripts": {
     "init:server": "cd Backend && pnpm i",
     "init:client": "cd Frontend && pnpm i",
-    "init:both": "concurrently \"pnpm init:server\" \"pnpm init:client\"",
-    "start:server": "cd Backend && pnpm dev",
-    "start:client": "cd Frontend && pnpm start",
-    "start:both": "concurrently \"pnpm start:server\" \"pnpm start:client\"",  
-    "preview:client": "cd Frontend && pnpm build && pnpm serve --port 3001",
-    "preview:server": "cd Backend && pnpm serve",
-    "preview:both": "pnpm init:both && concurrently \"pnpm preview:server\" \"pnpm preview:client\""
+    "init": "concurrently \"pnpm init:server\" \"pnpm init:client\"",
+    
+    "dev:server": "cd Backend && pnpm dev",
+    "dev:client": "cd Frontend && pnpm dev",
+    "dev": "concurrently \"pnpm dev:server\" \"pnpm dev:client\"",
+    
+    "preview:client": "cd Frontend && pnpm build && pnpm start --port 3000",
+    "preview:server": "cd Backend && pnpm start",
+    "preview": "pnpm init:both && concurrently \"pnpm preview:server\" \"pnpm preview:client\""
   },
   "keywords": [],
   "author": "Dhawal Vijayvargiya",
