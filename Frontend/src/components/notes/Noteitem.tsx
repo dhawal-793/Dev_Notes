@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AlertModal from "@/components/modals/alert-modal";
 import ToolTipBox from "@/components/ui/tool-tip-box";
-import noteContext from "@/context/Notes/noteContext";
+import {NoteContext} from "@/providers/note-provider";
 import { Note } from "@/types";
 
 interface NoteitemProps {
@@ -14,7 +14,7 @@ interface NoteitemProps {
 }
 
 const Noteitem: FC<NoteitemProps> = ({ note, updateNote }) => {
-  const context = useContext(noteContext);
+  const context = useContext(NoteContext);
   const { deleteNote } = context;
   const [open, setOpen] = useState(false)
 

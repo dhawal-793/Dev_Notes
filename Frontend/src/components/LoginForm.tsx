@@ -99,7 +99,7 @@ const LoginForm = () => {
                                                     {...field}
                                                     className='pr-10'
                                                 />
-                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5' onClick={() => setShowPassword(prev => !prev)}>
+                                                <button type="button" disabled={loading} className='absolute inset-y-0 grid place-items-center right-5 opacity-80 focus:opacity-100' onClick={() => setShowPassword(prev => !prev)}>
                                                     <EyeOff size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${showPassword ? "scale-100" : "scale-0"}`} />
                                                     <Eye size={20} className={`${loading ? "text-input" : "text-foreground"} absolute transition-all duration-200 ${!showPassword ? "scale-100" : "scale-0"}`} />
                                                 </button>
@@ -127,9 +127,9 @@ const LoginForm = () => {
                                 </Button>
                             </div>
                             <div className='sm:pr-3'>
-                                <p className='flex items-center text-base sm:text-lg text-accent-foreground/50 text- '>
+                                <p className='flex items-center text-base sm:text-lg text-accent-foreground/50 '>
                                     <span>Need an Accout ?</span>
-                                    <Link to="/signup" className=' pb-[2px] ml-2 text-sm sm:text-base border-b border-b-current text-accent-foreground/90 hover:text-accent-foreground'>Sign up now!</Link>
+                                    <Link to={loading ? "/login" : "/signup"} className={`pb-[2px] ml-2 text-sm sm:text-base border-b border-b-current  ${loading ? "text-input" : "text-accent-foreground/90 hover:text-accent-foreground"}`}>Sign up now!</Link>
                                 </p>
                             </div>
                         </div>
