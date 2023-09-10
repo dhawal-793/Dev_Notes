@@ -1,11 +1,11 @@
 import { FC } from "react"
 
 import { TooltipProvider } from "@/components/ui/tooltip"
-import NoteState from "@/context/Notes/noteState"
-import UserState from "@/context/Users/userState"
 
+import NoteProvider from "./note-provider"
 import ToastProvider from "./toast-provider"
 import ThemeProvider from "./theme-provider"
+import UserProvider from "./user-provider"
 
 interface Providersprops {
     children: React.ReactNode
@@ -14,14 +14,14 @@ interface Providersprops {
 const Providers: FC<Providersprops> = ({ children }) => {
     return (
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <UserState>
-                <NoteState>
+            <UserProvider>
+                <NoteProvider>
                     <TooltipProvider>
                         <ToastProvider />
                         {children}
                     </TooltipProvider>
-                </NoteState >
-            </UserState>
+                </NoteProvider >
+            </UserProvider>
         </ThemeProvider>
     )
 }
