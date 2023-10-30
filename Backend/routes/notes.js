@@ -4,33 +4,28 @@ const Notes = require("../models/Notes");
 const fetchuser = require("../middleware/fetchuser");
 const { body, validationResult } = require("express-validator");
 
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
 
 // ROUTE 1: Get all the notes of user using :  GET -> "/api/notes/fetchallnotes" . Note: ' Login Required'.
 router.get("/fetchallnotes", fetchuser, async (req, res) => {
-  let success = false;
   // Put everything inside the try block so that if any error occur then,
   // we can handle in the catch block
   try {
     // get all the notes using the user id
     const notes = await Notes.find({ user: req.user.id });
     // return success status 200 with notes message
-    success = true;
     return res
       .status(200)
-      .json({ success, message: "All Notes Fetched Successfully", notes });
+      .json({ message: "All Notes Fetched Successfully", notes });
   } catch (error) {
     // If any error occured then return status 500 with message Internal Server error
     return res.status(500).json({
-      error: "Internal Server Error",
+      message: "Internal Server Error",
       errors: error,
     });
   }
 });
 
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 // ROUTE 2: Add new notes for loggedIn user using :  POST -> "/api/notes/addnotes" . Note: ' Login Required'.
 router.post(
@@ -48,16 +43,13 @@ router.post(
   async (req, res) => {
     const { title, description, tag } = req.body;
     const errors = validationResult(req);
-    let success = false;
     //  If there is any error return error 400 status with the error
     if (!errors.isEmpty()) {
       return res.status(500).json({
-        success,
         message: "Internal Server Error",
         error: errors,
       });
     }
-
     // Put everything inside the try block so that if any error occur then,
     // we can handle in the catch block
     try {
@@ -66,16 +58,13 @@ router.post(
       // Save the notes into the database
       const savenotes = await note.save();
       // return success status 200 with the note message
-      success = true;
       return res.status(200).json({
-        success,
         message: "Note added successfully",
         note: savenotes,
       });
     } catch (error) {
       // If any error occured then return status 500 with message Internal Server error
       return res.status(500).json({
-        success,
         message: "Internal Server Error",
         error: error,
       });
@@ -83,19 +72,15 @@ router.post(
   }
 );
 
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 // ROUTE 3: Update any existing note for loggedIn user using :  PUT -> "/api/notes/updatenote/:id" . Note: ' Login Required'.
 router.put("/updatenote/:id", fetchuser, async (req, res) => {
   // Get all the notes data enetred by user using destructuring
   const { title, description, tag } = req.body;
   const errors = validationResult(req);
-  let success = false;
   //  If there is any error return error 400 status with the error
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      success,
       message: "Internal Server Error",
       error: errors,
     });
@@ -119,14 +104,14 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
     let note = await Notes.findById(req.params.id);
     // If not found return not found error
     if (!note) {
-      return res.status(404).json({ success, message: "Not Found" });
+      return res.status(404).json({ message: "Not Found" });
     }
     // Check if the note belongs to the logged in user if not return unauthorised error
 
     if (note.user.toString() !== req.user.id) {
       return res
         .status(401)
-        .json({ success, message: "Unauthorised: Not Allowed" });
+        .json({ message: "Unauthorised: Not Allowed" });
     }
     note = await Notes.findByIdAndUpdate(
       req.params.id,
@@ -135,9 +120,7 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
     );
 
     // return success status 200 with the note message
-    success = true;
     return res.status(200).json({
-      success,
       message: "Note Updated Successfully",
       note: note,
     });
@@ -145,24 +128,19 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
     // If any error occured then return status 500 with message Internal Server error
 
     return res.status(500).json({
-      success,
       message: "Internal Server Error",
       error: error,
     });
   }
 });
 
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 // ROUTE 4: Delete any note for loggedIn user using :  DELETE -> "/api/notes/deletenote/:id" . Note: ' Login Required'.
 router.delete("/deletenote/:id", fetchuser, async (req, res) => {
   const errors = validationResult(req);
-  let success = false;
   //  If there is any error return error 400 status with the error
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      success,
       message: "Internal Server Error",
       error: errors,
     });
@@ -174,33 +152,59 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
     let note = await Notes.findById(req.params.id);
     // If not found return not found error
     if (!note) {
-      return res.status(404).json({ success, message: "Not Found" });
+      return res.status(404).json({ message: "Not Found" });
     }
     // Check if the note belongs to the logged in user if not return unauthorised error
     if (note.user.toString() !== req.user.id) {
       return res
         .status(401)
-        .json({ success, message: "Unauthorised: Not Allowed" });
+        .json({ message: "Unauthorised: Not Allowed" });
     }
     note = await Notes.findByIdAndDelete(req.params.id);
     // return success status 200 with the note message
-    success=true
+
     return res
       .status(200)
-      .json({ success, message: "Note deleted Successfully", note: note });
+      .json({ message: "Note deleted Successfully", note: note });
   } catch (error) {
     // If any error occured then return status 500 with message Internal Server error
     return res.status(500).json({
-      success,
       message: "Internal Server Error",
       error: error,
     });
   }
 });
 
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+// // ROUTE 5: Get note of user using noteId :  GET -> "/api/notes/fetchnote/:id" . Note: ' Login Required'.
+// router.get("/fetchnote/:id", fetchuser, async (req, res) => {
+//   // Put everything inside the try block so that if any error occur then,
+//   // we can handle in the catch block
+//   try {
+//     // get all the notes using the user id
+//     let note = await Notes.findById(req.params.id);
+//     // If not found return not found error
+//     if (!note) {
+//       return res.status(404).json({ message: "Not Found" });
+//     }
+//     // Check if the note belongs to the logged in user if not return unauthorised error
 
-// EXPORT
+//     if (note.user.toString() !== req.user.id) {
+//       return res
+//         .status(401)
+//         .json({ message: "Unauthorised: Not Allowed" });
+//     }
+//     // return success status 200 with notes message
+//     return res
+//       .status(200)
+//       .json({ message: "Note Fetched Successfully", note });
+//   } catch (error) {
+//     // If any error occured then return status 500 with message Internal Server error
+//     return res.status(500).json({
+//       error: "Internal Server Error",
+//       errors: error,
+//     });
+//   }
+// });
+
 
 module.exports = router;
