@@ -5,7 +5,7 @@
   "scripts": {
     "init:server": "cd Backend && pnpm i",
     "init:client": "cd Frontend && pnpm i",
-    "init": "concurrently \"pnpm init:server\" \"pnpm init:client\"",
+    "init:both": "concurrently \"pnpm init:server\" \"pnpm init:client\"",
     
     "dev:server": "cd Backend && pnpm dev",
     "dev:client": "cd Frontend && pnpm dev",
