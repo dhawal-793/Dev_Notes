@@ -165,10 +165,15 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "Note deleted Successfully", note: note });
+      .json({
+        success: true,
+        message: "Note deleted successfully",
+        note: note,
+      });
   } catch (error) {
     // If any error occured then return status 500 with message Internal Server error
     return res.status(500).json({
+      success: false,
       message: "Internal Server Error",
       error: error,
     });

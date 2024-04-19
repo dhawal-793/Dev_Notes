@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AlertModal from "@/components/modals/alert-modal";
 import ToolTipBox from "@/components/ui/tool-tip-box";
-import {NoteContext} from "@/providers/note-provider";
+import { NoteContext } from "@/providers/note-provider";
 import { Note } from "@/types";
 
 interface NoteitemProps {
@@ -18,9 +18,14 @@ const Noteitem: FC<NoteitemProps> = ({ note, updateNote }) => {
   const { deleteNote } = context;
   const [open, setOpen] = useState(false)
 
+  const delete_Note = async (id: string) => {
+    deleteNote(id)
+    setOpen(false)
+  };
+
   return (
     <>
-      <AlertModal isOpen={open} onClose={() => setOpen(false)} onConfirm={() => deleteNote(note._id)} />
+      <AlertModal isOpen={open} onClose={() => setOpen(false)} onConfirm={() => delete_Note(note._id)} />
 
       <Card className="w-full">
         <CardHeader className="px-2 pt-2">

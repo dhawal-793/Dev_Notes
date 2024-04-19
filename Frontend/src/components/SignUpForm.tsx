@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Eye, EyeOff } from 'lucide-react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input';
@@ -28,6 +28,10 @@ const formSchema = z.object({
 })
 
 type SignUpFormValues = z.infer<typeof formSchema>
+
+interface ErrorResponse {
+    message: string;
+}
 
 const SignUpForm = () => {
 
@@ -66,7 +70,16 @@ const SignUpForm = () => {
             toast.success(res.data.message)
             navigate('/')
         } catch (error) {
-            toast.error("Something went wrong")
+            if (axios.isAxiosError(error)) {
+                const axiosError = error as AxiosError<ErrorResponse>;
+                if (axiosError.response && axiosError.response.data) {
+                    toast.error(axiosError.response.data.message);
+                } else {
+                    toast.error('An error occurred');
+                }
+            } else {
+                toast.error('An error occurred');
+            }
         }
         finally {
             setLoading(false)

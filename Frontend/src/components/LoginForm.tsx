@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input';
@@ -21,6 +21,10 @@ const formSchema = z.object({
 })
 
 type LoginFormValues = z.infer<typeof formSchema>
+
+interface ErrorResponse {
+    message: string;
+}
 
 const LoginForm = () => {
 
@@ -51,7 +55,16 @@ const LoginForm = () => {
             toast.success(res.data.message)
             navigate('/')
         } catch (error) {
-            toast.error("Something went wrong")
+            if (axios.isAxiosError(error)) {
+                const axiosError = error as AxiosError<ErrorResponse>;
+                if (axiosError.response && axiosError.response.data) {
+                    toast.error(axiosError.response.data.message);
+                } else {
+                    toast.error('An error occurred');
+                }
+            } else {
+                toast.error('An error occurred');
+            }
         }
         finally {
             setLoading(false)
